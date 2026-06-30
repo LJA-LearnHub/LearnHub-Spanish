@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pasaporte — Tu viaje por el español</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --paper:#ECE0C4;
+  --paper-light:#F8F1E0;
+  --paper-dark:#DECBA0;
+  --ink:#1F2A44;
+  --ink-soft:#566085;
+  --teal:#1B7A72;
+  --teal-deep:#11534D;
+  --red:#B0392D;
+  --red-deep:#812A21;
+  --gold:#C18F2C;
+  --line:rgba(31,42,68,0.20);
+  --shadow:0 3px 10px rgba(31,42,68,0.16);
+  --shadow-lg:0 8px 24px rgba(31,42,68,0.22);
+  --radius:16px;
+  --max-w:480px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  font-family:'Inter',-apple-system,sans-serif;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,transparent,transparent 26px,var(--line) 26px,var(--line) 27px);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;}
+p{margin:0;}
+button{font-family:inherit;}
+.eyebrow{
+  font-family:'Special Elite',monospace;
+  font-size:11px;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+button:focus-visible, a:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--gold);
+  outline-offset:2px;
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+}
+
+/* ============ APP SHELL ============ */
+#app{max-width:var(--max-w);margin:0 auto;min-height:100vh;position:relative;padding-bottom:88px;}
+
+.app-header{
+  padding:22px 20px 18px;
+  border-bottom:3px double var(--ink);
+  background:linear-gradient(180deg,var(--paper-light),transparent);
+}
+.app-title{font-size:30px;font-weight:700;color:var(--ink);letter-spacing:-0.5px;}
+.app-title em{color:var(--teal);font-style:italic;font-weight:500;}
+.app-sub{margin-top:4px;font-size:14px;color:var(--ink-soft);font-style:italic;font-family:'Fraunces',serif;}
+
+.back-row{display:flex;align-items:center;gap:10px;padding:18px 20px 4px;}
+.back-btn{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:none;color:var(--ink);
+  font-size:14px;font-weight:600;cursor:pointer;padding:6px 4px;min-height:32px;
+}
+.back-btn svg{width:16px;height:16px;}
+
+.screen{padding:4px 20px 28px;}
+
+/* ============ BOTTOM NAV ============ */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  max-width:var(--max-w);margin:0 auto;
+  background:var(--paper-light);
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;align-items:center;
+  padding:6px 4px max(6px,env(safe-area-inset-bottom));
+  z-index:20;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  background:none;border:none;cursor:pointer;
+  padding:6px 10px;min-width:60px;min-height:48px;
+  color:var(--ink-soft);
+}
+.nav-item.active{color:var(--teal);}
+.nav-item svg{width:22px;height:22px;}
+.nav-icon-stamp{
+  width:20px;height:20px;border-radius:50%;border:2px solid currentColor;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Special Elite',monospace;font-size:10px;
+}
+.nav-label{font-size:10.5px;font-weight:600;letter-spacing:0.2px;}
+
+/* ============ HOME ============ */
+.intro-line{font-size:14px;color:var(--ink-soft);line-height:1.5;margin:14px 0 18px;}
+.intro-line strong{color:var(--ink);}
+
+.level-card{
+  display:block;width:100%;text-align:left;
+  background:var(--paper-light);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  padding:18px;margin-bottom:16px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.level-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.level-card h2{font-size:22px;font-weight:700;}
+.level-card .eyebrow{display:block;margin-bottom:4px;}
+.level-meta{font-size:13px;color:var(--ink-soft);margin-top:6px;line-height:1.5;}
+.level-progress-track{
+  margin-top:14px;height:8px;border-radius:5px;
+  background:var(--paper-dark);overflow:hidden;
+}
+.level-progress-fill{height:100%;background:var(--teal);border-radius:5px;transition:width 0.4s ease;}
+.level-progress-label{margin-top:6px;font-size:12px;color:var(--ink-soft);font-weight:600;}
+.level-card-stamp{flex-shrink:0;}
+
+.home-stats{display:flex;gap:10px;margin:18px 0 22px;flex-wrap:wrap;}
+.stat-box{
+  flex:1;min-width:78px;background:var(--paper-light);border:1.5px solid var(--line);
+  border-radius:12px;padding:12px 8px;text-align:center;
+}
+.stat-num{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--teal);}
+.stat-label{font-size:10px;color:var(--ink-soft);margin-top:2px;text-transform:uppercase;letter-spacing:0.3px;}
+
+.how-box{
+  border:1.5px dashed var(--line);border-radius:12px;padding:14px 16px;margin-top:6px;
+}
+.how-box h3{font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink-soft);margin-bottom:8px;font-family:'Inter';font-weight:700;}
+.how-steps{font-size:13.5px;color:var(--ink);line-height:2;}
+.how-steps b{color:var(--teal);}
+.how-steps span{color:var(--ink-soft);font-size:12px;}
+
+/* ============ LEVEL SCREEN (unit grid) ============ */
+.level-header-card{
+  background:var(--paper-light);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:16px 18px;margin-bottom:18px;box-shadow:var(--shadow);
+}
+.level-header-card h2{font-size:24px;}
+.unit-card{
+  display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+  background:var(--paper-light);border:1.5px solid var(--line);border-radius:14px;
+  padding:13px 14px;margin-bottom:10px;cursor:pointer;
+}
+.unit-card:active{background:var(--paper-dark);}
+.unit-card-num{
+  flex-shrink:0;width:38px;height:38px;border-radius:50%;
+  background:var(--ink);color:var(--paper-light);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-weight:700;font-size:15px;
+}
+.unit-card-body{flex:1;min-width:0;}
+.unit-card-title{font-weight:700;font-size:15.5px;}
+.unit-card-en{font-size:12.5px;color:var(--ink-soft);margin-top:1px;}
+.unit-card-country{
+  display:inline-block;margin-top:5px;font-family:'Special Elite',monospace;
+  font-size:10px;color:var(--ink-soft);letter-spacing:0.3px;
+}
+.unit-card-score{font-size:11px;color:var(--teal);font-weight:700;margin-top:3px;}
+
+/* ============ STAMP (signature element) ============ */
+.stamp{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Special Elite',monospace;font-size:9px;letter-spacing:0.3px;text-align:center;
+  position:relative;border:2.5px solid currentColor;
+}
+.stamp::after{
+  content:'';position:absolute;inset:4px;border:1px solid currentColor;border-radius:50%;
+}
+.stamp.filled.teal{color:var(--teal);background:rgba(27,122,114,0.10);}
+.stamp.filled.red{color:var(--red);background:rgba(176,57,45,0.10);}
+.stamp.empty{color:var(--paper-dark);border-style:dashed;}
+.stamp-lg{width:64px;height:64px;font-size:11px;}
+
+/* ============ UNIT SCREEN ============ */
+.unit-meta-card{
+  background:var(--paper-light);border:2px solid var(--ink);border-radius:var(--radius);
+  padding:16px 18px;margin-bottom:16px;box-shadow:var(--shadow);
+}
+.unit-meta-card h2{font-size:21px;}
+.unit-meta-en{font-size:13px;color:var(--ink-soft);font-style:italic;margin-top:2px;font-family:'Fraunces',serif;}
+.unit-meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.tag{
+  font-family:'Special Elite',monospace;font-size:10px;letter-spacing:0.3px;
+  border:1px solid var(--ink-soft);color:var(--ink-soft);border-radius:20px;
+  padding:3px 9px;
+}
+
+.tab-bar{display:flex;gap:6px;margin-bottom:18px;border-bottom:2px solid var(--line);}
+.tab-btn{
+  flex:1;background:none;border:none;cursor:pointer;
+  padding:10px 4px;font-size:12.5px;font-weight:700;color:var(--ink-soft);
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  min-height:44px;
+}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);}
+
+/* ============ FLASHCARDS ============ */
+.flash-counter{text-align:center;font-size:12px;color:var(--ink-soft);font-weight:600;margin-bottom:10px;}
+.flashcard-wrap{perspective:1400px;margin-bottom:16px;}
+.flashcard{
+  position:relative;width:100%;height:230px;cursor:pointer;
+  transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(.4,.1,.2,1);
+}
+.flashcard.flipped{transform:rotateY(180deg);}
+.flashcard-face{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border:2px solid var(--ink);border-radius:var(--radius);background:var(--paper-light);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;box-shadow:var(--shadow-lg);text-align:center;
+}
+.flashcard-back{transform:rotateY(180deg);}
+.flash-word{font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:var(--ink);}
+.flash-pron{font-family:'Special Elite',monospace;font-size:13px;color:var(--ink-soft);margin-top:10px;}
+.flash-en{font-family:'Fraunces',serif;font-size:23px;font-weight:600;color:var(--teal-deep);}
+.flash-tap-hint{position:absolute;bottom:10px;font-size:10.5px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.4px;}
+.flash-listen{
+  margin-top:14px;display:inline-flex;align-items:center;gap:6px;
+  background:var(--paper);border:1.5px solid var(--ink-soft);border-radius:20px;
+  padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:pointer;
+}
+.flash-nav{display:flex;justify-content:space-between;gap:10px;}
+.flash-dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.flash-dot{width:7px;height:7px;border-radius:50%;background:var(--paper-dark);}
+.flash-dot.on{background:var(--teal);}
+
+/* Useful phrases (vocab tab) */
+.phrases-box{margin-top:24px;padding-top:18px;border-top:1.5px dashed var(--line);}
+.phrases-title{font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);font-weight:700;margin-bottom:10px;}
+.phrase-item{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);}
+.phrase-item:last-child{border-bottom:none;}
+.phrase-es{font-weight:600;font-size:13.5px;line-height:1.4;}
+.phrase-en{font-size:11.5px;color:var(--ink-soft);text-align:right;flex-shrink:0;line-height:1.4;}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:12px;padding:13px 18px;font-size:14.5px;font-weight:700;
+  cursor:pointer;border:2px solid var(--ink);min-height:46px;
+}
+.btn-primary{background:var(--ink);color:var(--paper-light);}
+.btn-secondary{background:var(--paper-light);color:var(--ink);}
+.btn-ghost{background:none;border-color:transparent;color:var(--ink-soft);text-decoration:underline;}
+.btn-block{width:100%;}
+.btn-row{display:flex;gap:10px;margin-top:6px;}
+.btn-row .btn{flex:1;}
+
+/* ============ GRAMMAR ============ */
+.grammar-section{margin-bottom:20px;padding-bottom:18px;border-bottom:1.5px dashed var(--line);}
+.grammar-section:last-of-type{border-bottom:none;padding-bottom:4px;}
+.grammar-point-num{font-family:'Special Elite',monospace;font-size:10.5px;color:var(--teal);text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:5px;}
+.grammar-title{font-size:18.5px;margin-bottom:10px;line-height:1.3;}
+.grammar-body{font-size:14.5px;line-height:1.7;color:var(--ink);margin-bottom:14px;}
+.example-box{
+  border-left:3px solid var(--gold);background:var(--paper-light);
+  border-radius:0 10px 10px 0;padding:12px 14px;margin-bottom:8px;
+}
+.example-es{font-size:14.5px;font-weight:600;font-style:italic;display:flex;align-items:center;gap:6px;justify-content:space-between;}
+.example-en{font-size:12.5px;color:var(--ink-soft);margin-top:3px;}
+.mini-speak{background:none;border:none;cursor:pointer;font-size:13px;padding:2px 4px;flex-shrink:0;}
+
+.conj-table{width:100%;border-collapse:collapse;margin:4px 0 16px;font-size:13px;}
+.conj-table th,.conj-table td{border:1px solid var(--line);padding:7px 8px;text-align:left;}
+.conj-table th{background:var(--paper-dark);font-family:'Special Elite',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.3px;font-weight:400;}
+.conj-table td:first-child{font-weight:700;color:var(--ink-soft);white-space:nowrap;}
+.table-caption{font-size:11.5px;color:var(--ink-soft);margin:-10px 0 14px;font-style:italic;}
+
+.mistake-box{
+  border:1.5px solid var(--red);border-radius:10px;background:rgba(176,57,45,0.06);
+  padding:13px 14px;margin-top:8px;
+}
+.mistake-box h4{font-family:'Special Elite',monospace;font-size:11px;text-transform:uppercase;color:var(--red-deep);margin-bottom:9px;letter-spacing:0.4px;font-weight:400;}
+.mistake-item{font-size:13px;line-height:1.65;margin-bottom:8px;padding-left:14px;position:relative;}
+.mistake-item:last-child{margin-bottom:0;}
+.mistake-item::before{content:'\2715';position:absolute;left:0;top:1px;color:var(--red);font-size:10px;}
+
+/* ============ QUIZ ============ */
+.quiz-progress{font-size:12px;color:var(--ink-soft);font-weight:600;margin-bottom:6px;display:flex;justify-content:space-between;}
+.quiz-cat{display:inline-block;font-family:'Special Elite',monospace;font-size:9.5px;text-transform:uppercase;color:var(--teal-deep);background:rgba(27,122,114,0.10);border-radius:12px;padding:3px 9px;margin-bottom:10px;letter-spacing:0.3px;}
+.quiz-q{font-size:17px;font-weight:600;line-height:1.4;margin-bottom:16px;}
+.quiz-choice{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  padding:13px 14px;margin-bottom:9px;border:2px solid var(--ink);border-radius:11px;
+  background:var(--paper-light);font-size:14.5px;cursor:pointer;min-height:46px;
+}
+.quiz-choice .letter{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
+}
+.quiz-choice.correct{border-color:var(--teal);background:rgba(27,122,114,0.13);}
+.quiz-choice.incorrect{border-color:var(--red);background:rgba(176,57,45,0.13);}
+.quiz-choice[disabled]{cursor:default;}
+.quiz-feedback{font-size:13px;font-weight:600;margin:6px 0 14px;min-height:18px;}
+.quiz-feedback.correct{color:var(--teal-deep);}
+.quiz-feedback.incorrect{color:var(--red-deep);}
+
+.results-wrap{text-align:center;padding:20px 4px;}
+.results-stamp{margin:0 auto 16px;}
+.results-score{font-family:'Fraunces',serif;font-size:38px;font-weight:700;}
+.results-msg{font-size:14.5px;color:var(--ink-soft);margin:8px 0 20px;line-height:1.5;}
+.results-breakdown{display:flex;justify-content:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+.rb-item{font-size:11px;color:var(--ink-soft);text-align:center;}
+.rb-num{display:block;font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--ink);}
+
+/* ============ CULTURE ============ */
+.culture-postmark{
+  display:inline-block;border:2px solid var(--ink);border-radius:10px;
+  padding:6px 14px;font-family:'Special Elite',monospace;font-size:13px;
+  letter-spacing:0.5px;margin-bottom:16px;
+}
+.quickfacts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.quickfact{background:var(--paper-light);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;}
+.quickfact-label{font-family:'Special Elite',monospace;font-size:9px;text-transform:uppercase;color:var(--ink-soft);letter-spacing:0.4px;}
+.quickfact-value{font-size:13px;font-weight:700;margin-top:3px;line-height:1.3;}
+.culture-note{font-size:15px;line-height:1.75;color:var(--ink);}
+.culture-note strong{color:var(--teal-deep);}
+.culture-subhead{font-size:12px;text-transform:uppercase;letter-spacing:0.4px;color:var(--ink-soft);font-weight:700;margin:18px 0 8px;}
+
+/* ============ PROGRESS SCREEN ============ */
+.progress-top{
+  display:flex;align-items:center;gap:14px;background:var(--paper-light);
+  border:2px solid var(--ink);border-radius:var(--radius);padding:16px;margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+.progress-ring{position:relative;width:64px;height:64px;flex-shrink:0;}
+.progress-ring svg{transform:rotate(-90deg);}
+.progress-ring-label{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-weight:700;font-size:14px;
+}
+.progress-section-title{font-size:13px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-soft);font-weight:700;margin:18px 0 10px;}
+.stamp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin-bottom:8px;}
+.stamp-grid-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.stamp-grid-label{font-size:9.5px;text-align:center;color:var(--ink-soft);line-height:1.2;}
+
+.reset-zone{margin-top:30px;padding-top:18px;border-top:1.5px dashed var(--line);text-align:center;}
+.reset-hint{font-size:12px;color:var(--ink-soft);margin-bottom:10px;}
+
+/* loading */
+.loading-wrap{display:flex;align-items:center;justify-content:center;min-height:60vh;}
+.loading-text{font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =====================================================================
+   COURSE DATA — TEKS §114.39 (Spanish I, Novice Mid–Novice High) and
+   §114.40 (Spanish II, Novice High–Intermediate Low). Each unit now
+   carries 16 vocab words, useful phrases, TWO grammar points (several
+   with full conjugation tables), a common-mistakes callout, a 10
+   question quiz, and a culture page with quick facts. Each unit still
+   moves through a different Spanish-speaking country.
+   ===================================================================== */
+const COURSE = {
+level1: {
+  name: "Spanish I", code: "TEKS \u00A7114.39", proficiency: "Novice Mid \u2192 Novice High",
+  units: [
+    {
+      id:"l1-1", title:"Saludos y Presentaciones", en:"Greetings & Introductions",
+      teksFocus:"Interpersonal & Interpretive Communication", country:"Espa\u00F1a",
+      vocab:[
+        {es:"Hola", en:"Hello", pron:"OH-lah"},
+        {es:"Buenos d\u00EDas", en:"Good morning", pron:"BWEH-nohs DEE-ahs"},
+        {es:"Buenas tardes", en:"Good afternoon", pron:"BWEH-nahs TAR-dehs"},
+        {es:"Buenas noches", en:"Good evening / night", pron:"BWEH-nahs NOH-chehs"},
+        {es:"Adi\u00F3s", en:"Goodbye", pron:"ah-DYOHS"},
+        {es:"\u00BFC\u00F3mo te llamas?", en:"What is your name? (informal)", pron:"KOH-moh teh YAH-mahs"},
+        {es:"Me llamo...", en:"My name is...", pron:"meh YAH-moh"},
+        {es:"Mucho gusto", en:"Nice to meet you", pron:"MOO-choh GOOS-toh"},
+        {es:"Igualmente", en:"Likewise", pron:"ee-gwahl-MEHN-teh"},
+        {es:"\u00BFC\u00F3mo est\u00E1s?", en:"How are you? (informal)", pron:"KOH-moh ehs-TAHS"},
+        {es:"Bien, gracias", en:"Fine, thank you", pron:"byehn GRAH-syahs"},
+        {es:"\u00BFDe d\u00F3nde eres?", en:"Where are you from? (informal)", pron:"deh DOHN-deh EH-rehs"},
+        {es:"Soy de...", en:"I am from...", pron:"soy deh"},
+        {es:"por favor", en:"please", pron:"por fah-VOR"},
+        {es:"gracias / de nada", en:"thank you / you're welcome", pron:"GRAH-syahs / deh NAH-dah"},
+        {es:"Hasta luego", en:"See you later", pron:"AHS-tah LWEH-goh"}
+      ],
+      phrases:[
+        {es:"\u00A1Bienvenido/a!", en:"Welcome!"},
+        {es:"\u00BFQu\u00E9 tal?", en:"How's it going? (casual)"},
+        {es:"Encantado/a de conocerte.", en:"Delighted to meet you."},
+        {es:"Lo siento, no entiendo.", en:"Sorry, I don't understand."},
+        {es:"\u00BFPuedes repetir, por favor?", en:"Can you repeat that, please?"},
+        {es:"Hasta ma\u00F1ana.", en:"See you tomorrow."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Subject Pronouns & T\u00FA vs. Usted",
+            body:"Spanish has more subject pronouns than English because verbs change to match the speaker. The singular ones are yo (I), t\u00FA (you, informal), and usted (you, formal). Use t\u00FA with friends, classmates, and family. Use usted with teachers, adults you don't know well, or anyone you want to show respect to \u2014 there's no exact English equivalent, so think of it as a built-in \u201Csir/ma'am\u201D politeness setting baked into the grammar itself, not just the vocabulary. In Spain, there's also a separate informal \u201Cyou all\u201D: vosotros/vosotras, used with groups of friends or family. Most of Latin America skips that distinction and just uses ustedes for every \u201Cyou all,\u201D whether the group is formal or not.",
+            table:{headers:["Pronoun","Meaning","Used with"], rows:[
+              ["yo","I","\u2014"],
+              ["t\u00FA","you (informal)","friends, peers, family"],
+              ["usted","you (formal)","teachers, strangers, elders"],
+              ["\u00E9l / ella","he / she","\u2014"],
+              ["nosotros/as","we","\u2014"],
+              ["vosotros/as","you all (informal, Spain)","friend groups in Spain"],
+              ["ustedes / ellos","you all (formal+informal in Latin Am.) / they","\u2014"]
+            ]},
+            examples:[
+              {es:"T\u00FA eres mi amigo.", en:"You are my friend. (informal, singular)"},
+              {es:"\u00BFC\u00F3mo est\u00E1 usted, profesor?", en:"How are you, professor? (formal)"},
+              {es:"Vosotros sois de Madrid.", en:"You all are from Madrid. (informal plural, used in Spain)"},
+              {es:"Ustedes son mis estudiantes.", en:"You all are my students. (Latin America, any formality)"}
+            ]
+          },
+          {
+            title:"The Verb Ser (to be) \u2014 Present Tense",
+            body:"Ser is one of the very first irregular verbs you'll need, and you'll use it constantly: for names, origin, and basic descriptions. It does not follow a regular pattern, so the five forms below are worth memorizing outright rather than trying to derive them from a rule. Note that Spanish often drops the subject pronoun entirely, since the verb ending already tells you who's doing the action \u2014 Soy de Texas is just as correct (and more natural) than Yo soy de Texas.",
+            table:{headers:["Pronoun","Ser"], rows:[
+              ["yo","soy"],["t\u00FA","eres"],["usted / \u00E9l / ella","es"],
+              ["nosotros/as","somos"],["vosotros/as","sois"],["ustedes / ellos/as","son"]
+            ]},
+            examples:[
+              {es:"Soy de Texas.", en:"I am from Texas."},
+              {es:"\u00BFEres estudiante?", en:"Are you a student?"},
+              {es:"Somos amigos.", en:"We are friends."},
+              {es:"Ella es de Espa\u00F1a.", en:"She is from Spain."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't use t\u00FA with a teacher or another adult you don't know well \u2014 default to usted until you're told otherwise; switching too early can come across as disrespectful.",
+          "Ser doesn't conjugate like a regular -er verb (it isn't \u201Cseo, ses, se\u201D) \u2014 its forms (soy, eres, es...) have to be memorized separately."
+        ]
+      },
+      quiz:[
+        {q:"How do you say \u201CHello\u201D in Spanish?", choices:["Adi\u00F3s","Hola","Gracias","Por favor"], a:1, cat:"Vocabulario"},
+        {q:"Which greeting is FORMAL?", choices:["\u00BFQu\u00E9 tal?","\u00BFC\u00F3mo est\u00E1 usted?","\u00BFC\u00F3mo estas?","\u00BFQu\u00E9 onda?"], a:1, cat:"Vocabulario"},
+        {q:"\u201CMucho gusto\u201D is closest to...", choices:["Good morning","See you later","Nice to meet you","How are you"], a:2, cat:"Vocabulario"},
+        {q:"Complete: \u201C\u00BF___ te llamas?\u201D", choices:["D\u00F3nde","Cu\u00E1ndo","Qu\u00E9","C\u00F3mo"], a:3, cat:"Gram\u00E1tica"},
+        {q:"In Spain, which pronoun means an informal \u201Cyou all\u201D?", choices:["ustedes","nosotros","vosotros","ellos"], a:2, cat:"Gram\u00E1tica"},
+        {q:"What is the \u201Cyo\u201D form of ser?", choices:["es","eres","soy","son"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CElla ___ de M\u00E9xico.\u201D", choices:["es","eres","soy","somos"], a:0, cat:"Gram\u00E1tica"},
+        {q:"\u201C\u00BFDe d\u00F3nde eres?\u201D is asking about...", choices:["your name","your age","your origin","your mood"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"Pick the correct response to \u201CMucho gusto.\u201D", choices:["Hasta luego","Igualmente","Por favor","De nada"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"In Spain, a first-time greeting often includes...", choices:["a deep bow","two cheek kisses","a fist bump","removing your shoes"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Espa\u00F1a",
+        facts:{capital:"Madrid", population:"\u224847 millones", language:"Espa\u00F1ol (castellano)", extra:"\u00DAnico pa\u00EDs hispanohablante de Europa"},
+        note:"In Spain, hola is often paired with two light kisses on the cheek \u2014 starting with the right \u2014 even between people meeting for the first time, instead of a handshake. Spain is the only country in Europe where Spanish (sometimes called castellano, to distinguish it from Spain's other regional languages like Catalan, Galician, and Basque) is the official national language. In most of the country, c before e/i and z are pronounced like the English \u201Cth,\u201D so gracias sounds closer to \u201CGRA-thias\u201D \u2014 a feature called distinci\u00F3n that you won't hear in most of Latin America, where those letters sound like \u201Cs.\u201D Spain's regions each carry distinct identities too: flamenco and tapas culture in the south (Andaluc\u00EDa), the running of the bulls in Pamplona, and a still-living tradition of the afternoon paseo, a slow evening walk through the plaza to socialize before dinner, which is eaten notably later than in the U.S., often after 9 p.m."
+      }
+    },
+    {
+      id:"l1-2", title:"N\u00FAmeros, Fecha y Hora", en:"Numbers, Date & Time",
+      teksFocus:"Interpretive Communication", country:"M\u00E9xico",
+      vocab:[
+        {es:"uno, dos, tres", en:"one, two, three", pron:"OO-noh, dohs, trehs"},
+        {es:"cuatro, cinco, seis", en:"four, five, six", pron:"KWAH-troh, SEEN-koh, says"},
+        {es:"siete, ocho, nueve, diez", en:"seven, eight, nine, ten", pron:"SYEH-teh, OH-choh, NWEH-veh, dyehs"},
+        {es:"veinte", en:"twenty", pron:"BAYN-teh"},
+        {es:"treinta, cuarenta, cincuenta", en:"thirty, forty, fifty", pron:"TRAYN-tah, kwa-REHN-tah"},
+        {es:"cien", en:"one hundred", pron:"syehn"},
+        {es:"\u00BFQu\u00E9 hora es?", en:"What time is it?", pron:"keh OH-rah ehs"},
+        {es:"Son las... / Es la...", en:"It is ... o'clock", pron:"sohn lahs"},
+        {es:"el lunes, el martes", en:"Monday, Tuesday", pron:"el LOO-nehs, el MAR-tehs"},
+        {es:"el mi\u00E9rcoles, el jueves, el viernes", en:"Wednesday, Thursday, Friday", pron:"el MYEHR-koh-lehs"},
+        {es:"el s\u00E1bado, el domingo", en:"Saturday, Sunday", pron:"el SAH-bah-doh"},
+        {es:"hoy", en:"today", pron:"oy"},
+        {es:"ma\u00F1ana", en:"tomorrow / morning", pron:"mah-NYAH-nah"},
+        {es:"el fin de semana", en:"the weekend", pron:"el feen deh seh-MAH-nah"},
+        {es:"el cumplea\u00F1os", en:"birthday", pron:"el koom-pleh-AH-nyohs"},
+        {es:"el a\u00F1o", en:"year", pron:"el AH-nyoh"}
+      ],
+      phrases:[
+        {es:"\u00BFCu\u00E1l es la fecha de hoy?", en:"What's today's date?"},
+        {es:"Hoy es el tres de marzo.", en:"Today is March 3rd."},
+        {es:"\u00A1Feliz cumplea\u00F1os!", en:"Happy birthday!"},
+        {es:"Nos vemos el lunes.", en:"See you on Monday."},
+        {es:"Tengo clase a las ocho.", en:"I have class at eight."},
+        {es:"Es tarde / Es temprano.", en:"It's late. / It's early."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Telling Time with Ser",
+            body:"Spanish uses ser to tell time, and the verb form depends on the number: Es la una (it's 1:00) because una is singular, but Son las dos, Son las tres, and so on, because every other hour is grammatically plural. To add minutes, use y (and) up to the half hour and menos (minus) after: Son las dos y cuarto (2:15), Es la una y media (1:30), Son las ocho menos diez (7:50, literally \u201Cten to eight\u201D). To specify morning, afternoon, or night, add de la ma\u00F1ana, de la tarde, or de la noche after the time, the rough equivalent of AM/PM.",
+            table:null,
+            examples:[
+              {es:"Son las cuatro y media de la tarde.", en:"It's 4:30 in the afternoon."},
+              {es:"Es la una en punto.", en:"It's exactly 1:00."},
+              {es:"Son las ocho menos diez de la ma\u00F1ana.", en:"It's 7:50 in the morning."},
+              {es:"\u00BFA qu\u00E9 hora es la clase? Es a las nueve.", en:"What time is class? It's at nine."}
+            ]
+          },
+          {
+            title:"Days, Months & Saying the Date",
+            body:"Days of the week and months are NOT capitalized in Spanish, unlike English \u2014 lunes, marzo, not Lunes, Marzo. The calendar week traditionally starts on lunes (Monday), not Sunday. To say a date, use el + number + de + month: el tres de marzo (March 3rd) \u2014 note the day comes before the month, opposite of the common U.S. order, and dates are written numerically as day/month/year (3/3/2026), not month/day/year. The only exception to using a plain number is the first of the month, which uses el primero: el primero de enero (January 1st).",
+            table:{headers:["Spanish","English"], rows:[
+              ["el primero de enero","January 1st"],
+              ["el cuatro de julio","July 4th"],
+              ["el treinta y uno de octubre","October 31st"],
+              ["el veinticinco de diciembre","December 25th"]
+            ]},
+            examples:[
+              {es:"Mi cumplea\u00F1os es el quince de mayo.", en:"My birthday is May 15th."},
+              {es:"Hoy es mi\u00E9rcoles, dos de septiembre.", en:"Today is Wednesday, September 2nd."},
+              {es:"El examen es el primero de octubre.", en:"The exam is on October 1st."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't say \u201Cuna hora\u201D to mean \u201Cwhat time is it\u201D \u2014 hora means \u201Chour/time\u201D as a concept, but the question is \u00BFQu\u00E9 hora es?, and the answer always starts with Es la... or Son las..., never just a bare number.",
+          "Remember the date format flips: 4/7 in a Spanish-speaking country usually means April 7th, not July 4th \u2014 day comes first, then month."
+        ]
+      },
+      quiz:[
+        {q:"What does \u201Cveinte\u201D mean?", choices:["12","20","200","2"], a:1, cat:"Vocabulario"},
+        {q:"\u201C\u00BFQu\u00E9 hora es?\u201D means...", choices:["What day is it?","What's the date?","What time is it?","How are you?"], a:2, cat:"Vocabulario"},
+        {q:"Which day comes right after \u201Cel lunes\u201D?", choices:["el domingo","el martes","el viernes","el mi\u00E9rcoles"], a:1, cat:"Vocabulario"},
+        {q:"Complete: \u201CSon las dos y ___.\u201D (half)", choices:["cuarto","hora","media","minutos"], a:2, cat:"Gram\u00E1tica"},
+        {q:"How do you say \u201CJanuary 1st\u201D?", choices:["el uno de enero","el primero de enero","el primer enero","uno enero"], a:1, cat:"Gram\u00E1tica"},
+        {q:"In Spanish, the calendar week traditionally starts on...", choices:["domingo","lunes","s\u00E1bado","viernes"], a:1, cat:"Gram\u00E1tica"},
+        {q:"4/7 in a Spanish-speaking country most likely means...", choices:["July 4th","April 7th","4:07","unclear, never used"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"Days and months in Spanish are...", choices:["always capitalized","never capitalized","capitalized only in titles","capitalized only on Mondays"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"What is celebrated in Mexico on November 1\u20132?", choices:["Cinco de Mayo","D\u00EDa de la Independencia","D\u00EDa de los Muertos","Las Posadas"], a:2, cat:"Cultura"},
+        {q:"Mexico's independence day is celebrated in which month?", choices:["May","July","September","November"], a:2, cat:"Cultura"}
+      ],
+      culture:{
+        country:"M\u00E9xico",
+        facts:{capital:"Ciudad de M\u00E9xico", population:"\u2248129 millones", language:"Espa\u00F1ol (m\u00E1s lenguas ind\u00EDgenas)", extra:"El pa\u00EDs hispanohablante m\u00E1s poblado"},
+        note:"Mexico observes D\u00EDa de los Muertos (Day of the Dead) on November 1st and 2nd, a UNESCO-recognized tradition that honors loved ones who have died with ofrendas (altars), marigolds, and pan de muerto. It's a joyful, colorful remembrance \u2014 not a sad or scary one, despite how it's sometimes portrayed outside Mexico. The ancient Aztec (Mexica) calendar, still studied by historians and visible on monuments like the famous Sun Stone, shows how precisely Mesoamerican civilizations tracked time centuries before European contact, using two interlocking calendars: one 365-day solar cycle and one 260-day ritual cycle. Mexico's actual independence \u2014 from Spain, in 1821 \u2014 is celebrated every September 16th, not on the much more commercialized-abroad Cinco de Mayo (which marks a single 1862 battle, mostly observed in the U.S.)."
+      }
+    },
+    {
+      id:"l1-3", title:"La Familia y Descripciones", en:"Family & Descriptions",
+      teksFocus:"Presentational Communication", country:"Cuba",
+      vocab:[
+        {es:"la madre / el padre", en:"mother / father", pron:"lah MAH-dreh / el PAH-dreh"},
+        {es:"los padres", en:"parents", pron:"lohs PAH-drehs"},
+        {es:"el hermano / la hermana", en:"brother / sister", pron:"el er-MAH-noh / lah er-MAH-nah"},
+        {es:"el hijo / la hija", en:"son / daughter", pron:"el EE-hoh / lah EE-hah"},
+        {es:"los abuelos", en:"grandparents", pron:"lohs ah-BWEH-lohs"},
+        {es:"el primo / la prima", en:"cousin", pron:"el PREE-moh"},
+        {es:"el t\u00EDo / la t\u00EDa", en:"uncle / aunt", pron:"el TEE-oh"},
+        {es:"alto / alta", en:"tall", pron:"AHL-toh / AHL-tah"},
+        {es:"bajo / baja", en:"short", pron:"BAH-hoh / BAH-hah"},
+        {es:"simp\u00E1tico / simp\u00E1tica", en:"nice, friendly", pron:"seem-PAH-tee-koh"},
+        {es:"inteligente", en:"intelligent", pron:"een-teh-lee-HEN-teh"},
+        {es:"gracioso / graciosa", en:"funny", pron:"grah-SYOH-soh"},
+        {es:"trabajador / trabajadora", en:"hardworking", pron:"trah-bah-hah-DOR"},
+        {es:"joven / mayor", en:"young / older", pron:"HOH-vehn / mah-YOR"},
+        {es:"el pelo / los ojos", en:"hair / eyes", pron:"el PEH-loh / lohs OH-hohs"},
+        {es:"tener ... a\u00F1os", en:"to be ... years old", pron:"teh-NEHR AH-nyohs"}
+      ],
+      phrases:[
+        {es:"Te presento a mi familia.", en:"Let me introduce you to my family."},
+        {es:"\u00BFCu\u00E1ntos a\u00F1os tienes?", en:"How old are you?"},
+        {es:"Se parece a su madre.", en:"He/she looks like his/her mother."},
+        {es:"Somos una familia grande.", en:"We are a big family."},
+        {es:"Mi hermano mayor / menor", en:"My older / younger brother"},
+        {es:"Nos llevamos bien.", en:"We get along well."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Ser + Adjective Agreement",
+            body:"Use ser to describe what someone is like (looks, personality, where they're from). The tricky part for English speakers: adjectives have to match the noun in gender and number. Adjectives ending in -o change to -a for feminine (alto \u2192 alta), and add -s for plural (altos, altas). Adjectives ending in -e or most consonants (like inteligente or trabajador) usually don't change for gender, only for number (inteligente \u2192 inteligentes) \u2014 with one common exception: adjectives ending in -or, like trabajador, DO add -a for feminine (trabajadora).",
+            table:{headers:["Form","Masc. sing.","Fem. sing.","Masc. pl.","Fem. pl."], rows:[
+              ["-o adjectives","alto","alta","altos","altas"],
+              ["-e adjectives","inteligente","inteligente","inteligentes","inteligentes"],
+              ["-or adjectives","trabajador","trabajadora","trabajadores","trabajadoras"]
+            ]},
+            examples:[
+              {es:"Mi hermano es alto y simp\u00E1tico.", en:"My brother is tall and nice."},
+              {es:"Mis abuelas son inteligentes.", en:"My grandmothers are intelligent."},
+              {es:"Ella es baja pero muy fuerte.", en:"She is short but very strong."},
+              {es:"Mi madre es trabajadora.", en:"My mother is hardworking."}
+            ]
+          },
+          {
+            title:"Possessive Adjectives",
+            body:"To say \u201Cmy,\u201D \u201Cyour,\u201D \u201Chis/her,\u201D and so on, Spanish possessives agree with the THING owned, not the owner \u2014 a common stumbling block. Mi hermano and mis hermanos both mean \u201Cmy brother(s)\u201D; the mi/mis only changes for number, not gender. Nuestro (our) is the one that changes for both gender and number, since it ends in -o: nuestro primo, nuestra prima, nuestros primos.",
+            table:{headers:["Owner","Singular","Plural"], rows:[
+              ["my","mi hermano","mis hermanos"],
+              ["your (informal)","tu hermano","tus hermanos"],
+              ["his/her/your (formal)","su hermano","sus hermanos"],
+              ["our","nuestro/a hermano/a","nuestros/as hermanos/as"],
+              ["their/your all's","su hermano","sus hermanos"]
+            ]},
+            examples:[
+              {es:"Mi familia es de La Habana.", en:"My family is from Havana."},
+              {es:"\u00BFC\u00F3mo se llama tu hermana?", en:"What's your sister's name?"},
+              {es:"Nuestra abuela vive con nosotros.", en:"Our grandmother lives with us."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't make mi/tu/su agree with the owner's gender \u2014 su casa means \u201Chis house\u201D AND \u201Cher house\u201D AND \u201Ctheir house\u201D; only context tells you which.",
+          "Watch out for trabajador: most -e and consonant-ending adjectives don't change for gender, but -or adjectives are an exception and do add -a (trabajadora, not \u201Ctrabajadore\u201D)."
+        ]
+      },
+      quiz:[
+        {q:"How do you say \u201Cgrandparents\u201D?", choices:["los padres","los hermanos","los abuelos","las madres"], a:2, cat:"Vocabulario"},
+        {q:"\u201CEl primo\u201D means...", choices:["uncle","cousin","nephew","grandfather"], a:1, cat:"Vocabulario"},
+        {q:"What is the feminine form of \u201Calto\u201D?", choices:["altos","alta","alte","altas"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Feminine form of \u201Ctrabajador\u201D?", choices:["trabajador","trabajadore","trabajadora","trabajadoras"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CTengo quince a\u00F1os\u201D means...", choices:["I have 15 siblings","I am 15 years old","It is 15:00","I have 15 dollars"], a:1, cat:"Vocabulario"},
+        {q:"Which adjective does NOT change for gender?", choices:["alto","bajo","inteligente","simp\u00E1tico"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CSu casa\u201D could mean...", choices:["only \u2018his house\u2019","only \u2018her house\u2019","his, her, OR their house","my house"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CNuestra abuela\u201D agrees with...", choices:["the owner being female","abuela being feminine","both owner and noun","neither"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CMis hermanos\u201D \u2014 mis changes for...", choices:["gender only","number only","both gender and number","neither"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"Family gatherings in Cuba are typically...", choices:["rare and formal","small and quiet","large and multigenerational","held only on holidays"], a:2, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Cuba",
+        facts:{capital:"La Habana", population:"\u224811 millones", language:"Espa\u00F1ol", extra:"Casco antiguo de La Habana, Patrimonio de la UNESCO"},
+        note:"Multigenerational households \u2014 grandparents, parents, and kids sharing one home \u2014 are very common in Cuba, and family gatherings tend to be large, loud, and frequent, with extended relatives treated almost like immediate family. Baseball (b\u00E9isbol) is practically a national obsession, with organized play dating back to the 1860s, making it one of the oldest baseball traditions outside the U.S. Old Havana's colorful colonial architecture, full of pastel facades and classic 1950s American cars still kept running today, is a UNESCO World Heritage Site, and Cuban music genres like son cubano laid the groundwork for salsa as it's known internationally."
+      }
+    },
+    {
+      id:"l1-4", title:"La Escuela", en:"School",
+      teksFocus:"Interpersonal Communication", country:"Argentina",
+      vocab:[
+        {es:"la clase", en:"class", pron:"lah KLAH-seh"},
+        {es:"el maestro / la maestra", en:"teacher", pron:"el mah-EHS-troh"},
+        {es:"la tarea", en:"homework", pron:"lah tah-REH-ah"},
+        {es:"el examen", en:"exam, test", pron:"el ehk-SAH-mehn"},
+        {es:"el libro / el cuaderno", en:"book / notebook", pron:"el LEE-broh / el kwah-DEHR-noh"},
+        {es:"la mochila", en:"backpack", pron:"lah moh-CHEE-lah"},
+        {es:"el l\u00E1piz / el bol\u00EDgrafo", en:"pencil / pen", pron:"el LAH-pees"},
+        {es:"el horario", en:"schedule", pron:"el oh-RAH-ree-oh"},
+        {es:"tener que + infinitivo", en:"to have to (do something)", pron:"teh-NEHR keh"},
+        {es:"la ciencia / las matem\u00E1ticas", en:"science / math", pron:"lah see-EHN-syah"},
+        {es:"la historia / el arte", en:"history / art", pron:"lah ees-TOH-ryah"},
+        {es:"estudiar", en:"to study", pron:"ehs-too-DYAR"},
+        {es:"aprender", en:"to learn", pron:"ah-prehn-DEHR"},
+        {es:"f\u00E1cil / dif\u00EDcil", en:"easy / difficult", pron:"FAH-seel / dee-FEE-seel"},
+        {es:"el recreo", en:"recess, break", pron:"el reh-KREH-oh"},
+        {es:"la calificaci\u00F3n", en:"grade (score)", pron:"lah kah-lee-fee-kah-SYOHN"}
+      ],
+      phrases:[
+        {es:"\u00BFTienes la tarea?", en:"Do you have the homework?"},
+        {es:"Saqu\u00E9 una buena nota.", en:"I got a good grade."},
+        {es:"No entiendo esta pregunta.", en:"I don't understand this question."},
+        {es:"\u00BFPuedo ir al ba\u00F1o?", en:"May I go to the restroom?"},
+        {es:"Se me olvid\u00F3 el libro.", en:"I forgot my book."},
+        {es:"\u00A1Hoy no hay clases!", en:"There's no school today!"}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"The Verb Tener (to have)",
+            body:"Tener is irregular, but you'll use it constantly: tengo (I have), tienes (you have), tiene (he/she/you formal has), tenemos (we have), tienen (they/you all have). Beyond ownership, tener shows up in expressions where English uses \u201Cto be\u201D instead: tener hambre (to be hungry), tener prisa (to be in a hurry), tener raz\u00F3n (to be right), tener sue\u00F1o (to be sleepy). Add que + an infinitive (a verb's unconjugated -ar/-er/-ir form) to say someone has to do something: tengo que estudiar (I have to study).",
+            table:{headers:["Pronoun","Tener"], rows:[
+              ["yo","tengo"],["t\u00FA","tienes"],["usted/\u00E9l/ella","tiene"],
+              ["nosotros/as","tenemos"],["ustedes/ellos/as","tienen"]
+            ]},
+            examples:[
+              {es:"Tengo cuatro clases hoy.", en:"I have four classes today."},
+              {es:"Tenemos que hacer la tarea.", en:"We have to do the homework."},
+              {es:"\u00BFTienes mi libro de ciencias?", en:"Do you have my science book?"},
+              {es:"Mi maestra tiene mucha paciencia.", en:"My teacher has a lot of patience."}
+            ]
+          },
+          {
+            title:"Regular -AR Verbs in the Present Tense",
+            body:"Most Spanish verbs fall into one of three families based on their infinitive ending: -ar, -er, or -ir. Regular -ar verbs (like estudiar, hablar, and the school-themed verbs in this unit) all conjugate the same predictable way: drop the -ar and add the ending that matches the subject. Once you learn this one pattern, you can conjugate hundreds of verbs \u2014 it's one of the highest-value grammar rules in all of Spanish I.",
+            table:{headers:["Pronoun","hablar (to speak)","Ending"], rows:[
+              ["yo","hablo","-o"],
+              ["t\u00FA","hablas","-as"],
+              ["usted/\u00E9l/ella","habla","-a"],
+              ["nosotros/as","hablamos","-amos"],
+              ["ustedes/ellos/as","hablan","-an"]
+            ]},
+            examples:[
+              {es:"Estudio espa\u00F1ol todos los d\u00EDas.", en:"I study Spanish every day."},
+              {es:"\u00BFHablas con tu maestra despu\u00E9s de clase?", en:"Do you talk to your teacher after class?"},
+              {es:"Mis compa\u00F1eros practican mucho.", en:"My classmates practice a lot."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't confuse tener (to have/own) with hay (there is/are) \u2014 tengo un libro (I have a book) vs. hay un libro en la mesa (there's a book on the table).",
+          "When conjugating -ar verbs, only drop the -ar ending, not more of the stem: estudiar \u2192 estudi- + o, not \u201Cestud- + io.\u201D"
+        ]
+      },
+      quiz:[
+        {q:"What is the \u201Cyo\u201D form of tener?", choices:["tiene","tengo","tienes","tenemos"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CLa mochila\u201D means...", choices:["the homework","the schedule","the backpack","the teacher"], a:2, cat:"Vocabulario"},
+        {q:"\u201CTengo que estudiar\u201D means...", choices:["I want to study","I have to study","I studied","I am studying"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Which word means \u201Cschedule\u201D?", choices:["el horario","el libro","la tarea","la clase"], a:0, cat:"Vocabulario"},
+        {q:"\u201CYo\u201D ending for regular -ar verbs?", choices:["-o","-as","-amos","-an"], a:0, cat:"Gram\u00E1tica"},
+        {q:"\u201CNosotros hablamos\u201D ending is...", choices:["-as","-amos","-an","-o"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CTener hambre\u201D literally translates to \u201Cto have hunger,\u201D but means...", choices:["to be hungry","to want food","to cook","to be full"], a:0, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CEstudiar\u201D belongs to which verb family?", choices:["-er","-ir","-ar","irregular only"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CF\u00E1cil\u201D is the opposite of...", choices:["dif\u00EDcil","grande","r\u00E1pido","nuevo"], a:0, cat:"Vocabulario"},
+        {q:"\u201CVos\u201D is an informal \u201Cyou\u201D used heavily in...", choices:["Espa\u00F1a","M\u00E9xico","Cuba","Argentina"], a:3, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Argentina",
+        facts:{capital:"Buenos Aires", population:"\u224846 millones", language:"Espa\u00F1ol (con voseo)", extra:"Segundo pa\u00EDs m\u00E1s grande de Sudam\u00E9rica"},
+        note:"In much of Argentina, students and teachers use vos instead of t\u00FA for informal \u201Cyou\u201D \u2014 a feature called voseo that changes verb endings slightly (vos ten\u00E9s instead of t\u00FA tienes, vos habl\u00E1s instead of t\u00FA hablas). It's not slang or a regional shortcut; it's the everyday grammatical standard taught in Argentine schools. Sharing mate (a hot, bitter herbal drink sipped through a metal straw called a bombilla and passed around a circle of friends) is also a common social ritual among classmates between classes. Buenos Aires, sometimes nicknamed \u201Cthe Paris of South America\u201D for its European-style architecture and wide boulevards, is also home to a massive, historic public school system that produced several Nobel laureates."
+      }
+    },
+    {
+      id:"l1-5", title:"La Comida", en:"Food",
+      teksFocus:"Interpersonal Communication", country:"Per\u00FA",
+      vocab:[
+        {es:"el desayuno", en:"breakfast", pron:"el deh-sah-YOO-noh"},
+        {es:"el almuerzo", en:"lunch", pron:"el al-MWEHR-soh"},
+        {es:"la cena", en:"dinner", pron:"lah SEH-nah"},
+        {es:"Me gusta(n)...", en:"I like...", pron:"meh GOOS-tah(n)"},
+        {es:"el agua", en:"water", pron:"el AH-gwah"},
+        {es:"el arroz / el pan", en:"rice / bread", pron:"el ah-RROHS / el pahn"},
+        {es:"la papa", en:"potato", pron:"lah PAH-pah"},
+        {es:"la fruta / la verdura", en:"fruit / vegetable", pron:"lah FROO-tah"},
+        {es:"el pollo / la carne", en:"chicken / meat", pron:"el POH-yoh / lah KAR-neh"},
+        {es:"el pescado", en:"fish", pron:"el pehs-KAH-doh"},
+        {es:"delicioso / deliciosa", en:"delicious", pron:"deh-lee-SYOH-soh"},
+        {es:"Quisiera...", en:"I would like... (polite)", pron:"kee-SYEH-rah"},
+        {es:"la cuenta, por favor", en:"the check, please", pron:"lah KWEHN-tah"},
+        {es:"\u00BFQu\u00E9 recomienda?", en:"What do you recommend?", pron:"keh reh-koh-MYEHN-dah"},
+        {es:"tener hambre / sed", en:"to be hungry / thirsty", pron:"teh-NEHR AHM-breh"},
+        {es:"el mesero / la mesera", en:"waiter / waitress", pron:"el meh-SEH-roh"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 vas a pedir?", en:"What are you going to order?"},
+        {es:"Para m\u00ED, el pollo, por favor.", en:"For me, the chicken, please."},
+        {es:"\u00BFEst\u00E1 incluida la propina?", en:"Is the tip included?"},
+        {es:"\u00A1Buen provecho!", en:"Enjoy your meal!"},
+        {es:"Soy al\u00E9rgico/a a...", en:"I'm allergic to..."},
+        {es:"Estoy lleno/a.", en:"I'm full."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Gustar (to please/to like)",
+            body:"Gustar doesn't work like English \u201Cto like.\u201D It literally means \u201Cto be pleasing to,\u201D so the food is the grammatical subject and the person becomes an indirect object: Me gusta la pizza literally says \u201CPizza is pleasing to me.\u201D Use gusta with one thing or an action (singular) and gustan with more than one noun (plural). Swap me for te (you), le (him/her), nos (us), or les (them) to talk about other people. To clarify or emphasize who's doing the liking \u2014 especially with le/les, which are ambiguous \u2014 add a + person: A mi hermano le gusta el ceviche.",
+            table:{headers:["Person","Pronoun","Example"], rows:[
+              ["I","me","Me gusta el caf\u00E9."],
+              ["you (informal)","te","Te gustan las papas."],
+              ["he/she/you (formal)","le","Le gusta la fruta."],
+              ["we","nos","Nos gusta cocinar."],
+              ["they/you all","les","Les gustan los tacos."]
+            ]},
+            examples:[
+              {es:"Me gusta el caf\u00E9 peruano.", en:"I like Peruvian coffee. (lit.: it is pleasing to me)"},
+              {es:"\u00BFTe gustan las papas fritas?", en:"Do you like french fries?"},
+              {es:"A mi hermano le gusta el ceviche.", en:"My brother likes ceviche."},
+              {es:"Nos gustan las frutas tropicales.", en:"We like tropical fruits."}
+            ]
+          },
+          {
+            title:"Regular -ER and -IR Verbs in the Present Tense",
+            body:"-er and -ir verbs share almost identical endings, differing only in the nosotros form. Comer (to eat) is the model -er verb; vivir (to live) is the model -ir verb. Once you have -ar (Unit 4), -er, and -ir down, you can conjugate the overwhelming majority of regular Spanish verbs in the present tense without hesitation.",
+            table:{headers:["Pronoun","comer (-er)","vivir (-ir)"], rows:[
+              ["yo","como","vivo"],
+              ["t\u00FA","comes","vives"],
+              ["usted/\u00E9l/ella","come","vive"],
+              ["nosotros/as","comemos","vivimos"],
+              ["ustedes/ellos/as","comen","viven"]
+            ]},
+            examples:[
+              {es:"Como arroz y pollo casi todos los d\u00EDas.", en:"I eat rice and chicken almost every day."},
+              {es:"\u00BFD\u00F3nde vives?", en:"Where do you live?"},
+              {es:"Mis padres comen pescado los viernes.", en:"My parents eat fish on Fridays."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't conjugate gustar to match the PERSON who likes something \u2014 it agrees with the THING being liked: \u201CMe gustan los tacos,\u201D not \u201CMe gusto los tacos.\u201D",
+          "-er and -ir verbs are identical except in the nosotros form (-emos vs. -imos) \u2014 mixing those two up is one of the most common beginner slips."
+        ]
+      },
+      quiz:[
+        {q:"Complete: \u201CMe ___ las manzanas.\u201D (apples, plural)", choices:["gusta","gustas","gustan","gustamos"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CQuisiera\u201D is a polite way to say...", choices:["I want","I would like","I have","I need"], a:1, cat:"Vocabulario"},
+        {q:"Which meal is \u201Cla cena\u201D?", choices:["breakfast","lunch","dinner","snack"], a:2, cat:"Vocabulario"},
+        {q:"\u201CA mi hermano le gusta\u201D means the liking belongs to...", choices:["me","you","my brother","us"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201Cyo\u201D form of comer?", choices:["com","como","como","comemos"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201Cnosotros\u201D form of vivir?", choices:["vivimos","vivemos","viven","vivamos"], a:0, cat:"Gram\u00E1tica"},
+        {q:"\u201CTengo sed\u201D means...", choices:["I'm hungry","I'm thirsty","I'm full","I'm tired"], a:1, cat:"Vocabulario"},
+        {q:"To clarify WHO likes something when using le, you add...", choices:["yo + person","a + person","de + person","con + person"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CEl mesero\u201D is...", choices:["the chef","the waiter","the menu","the bill"], a:1, cat:"Vocabulario"},
+        {q:"Which vegetable originally comes from the Andes in Peru?", choices:["el ma\u00EDz","la papa","el tomate","el arroz"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Per\u00FA",
+        facts:{capital:"Lima", population:"\u224834 millones", language:"Espa\u00F1ol, quechua, aimara", extra:"Hogar de Machu Picchu"},
+        note:"The potato (la papa) originated in the Andes mountains of Peru, where farmers still grow thousands of native varieties \u2014 in colors ranging from purple to gold, many of which never reach supermarkets outside the region. Peruvian cuisine blends Indigenous Andean, Spanish, African, Chinese (chifa), and Japanese (nikkei) influences into one of the most internationally celebrated food cultures in Latin America. Ceviche \u2014 raw fish \u201Ccooked\u201D in citrus juice with onion and chili \u2014 is the most famous example, and it's so central to national identity that Peru has an official national Ceviche Day (June 28th). Quechua, the language of the Inca Empire, is still spoken by millions of Peruvians today and is co-official alongside Spanish in many regions."
+      }
+    },
+    {
+      id:"l1-6", title:"Deportes, Pasatiempos y el Clima", en:"Sports, Hobbies & Weather",
+      teksFocus:"Presentational Communication", country:"Chile",
+      vocab:[
+        {es:"jugar al f\u00FAtbol", en:"to play soccer", pron:"hoo-GAR al FOOT-bohl"},
+        {es:"nadar", en:"to swim", pron:"nah-DAR"},
+        {es:"esquiar", en:"to ski", pron:"ehs-kee-AR"},
+        {es:"correr", en:"to run", pron:"koh-RREHR"},
+        {es:"montar en bicicleta", en:"to ride a bike", pron:"mohn-TAR ehn bee-see-KLEH-tah"},
+        {es:"escuchar m\u00FAsica", en:"to listen to music", pron:"ehs-koo-CHAR MOO-see-kah"},
+        {es:"leer / dibujar", en:"to read / to draw", pron:"leh-EHR / dee-boo-HAR"},
+        {es:"Hace calor / fr\u00EDo", en:"It's hot / cold", pron:"AH-seh kah-LOR"},
+        {es:"Hace sol / viento", en:"It's sunny / windy", pron:"AH-seh sohl"},
+        {es:"Llueve / Nieva", en:"It rains / It snows", pron:"YWEH-veh / NYEH-vah"},
+        {es:"est\u00E1 nublado", en:"it's cloudy", pron:"ehs-TAH noo-BLAH-doh"},
+        {es:"el invierno / el verano", en:"winter / summer", pron:"el een-VYEHR-noh"},
+        {es:"la primavera / el oto\u00F1o", en:"spring / fall", pron:"lah pree-mah-VEH-rah"},
+        {es:"divertido / divertida", en:"fun", pron:"dee-vehr-TEE-doh"},
+        {es:"el tiempo libre", en:"free time", pron:"el TYEHM-poh LEE-breh"},
+        {es:"el equipo", en:"team", pron:"el eh-KEE-poh"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 tiempo hace hoy?", en:"What's the weather like today?"},
+        {es:"\u00BFQu\u00E9 te gusta hacer en tu tiempo libre?", en:"What do you like to do in your free time?"},
+        {es:"Vamos a jugar despu\u00E9s de clase.", en:"Let's play after class."},
+        {es:"Mi equipo favorito es...", en:"My favorite team is..."},
+        {es:"Hace un d\u00EDa perfecto para nadar.", en:"It's a perfect day to swim."},
+        {es:"Prefiero quedarme en casa.", en:"I prefer to stay home."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Gustar + Infinitive & Weather with Hacer",
+            body:"To say you like an activity (not a thing), pair gustar with an infinitive verb, and always use the singular gusta \u2014 even with more than one activity listed: Me gusta nadar y esquiar uses gusta, not gustan, because grammatically the whole activity is treated as one idea. Weather expressions mostly use hacer (to make/do): hace calor, hace fr\u00EDo, hace sol, hace viento \u2014 literally \u201Cit makes heat,\u201D etc. Llover (to rain) and nevar (to snow) are exceptions that conjugate as their own verbs: llueve, nieva, and cloudy weather uses estar instead: est\u00E1 nublado.",
+            table:null,
+            examples:[
+              {es:"Me gusta jugar al f\u00FAtbol en el verano.", en:"I like to play soccer in the summer."},
+              {es:"Hace mucho fr\u00EDo y nieva en los Andes.", en:"It's very cold and it's snowing in the Andes."},
+              {es:"\u00BFTe gusta esquiar o nadar?", en:"Do you like to ski or swim?"},
+              {es:"Hoy est\u00E1 nublado pero no llueve.", en:"Today it's cloudy but it's not raining."}
+            ]
+          },
+          {
+            title:"Stem-Changing Verbs (e\u2192ie, o\u2192ue)",
+            body:"Some present-tense verbs change a vowel in the stem for every form EXCEPT nosotros/vosotros, which keeps the original vowel. Querer (to want) changes e\u2192ie; poder (to be able to/can) changes o\u2192ue; jugar (to play a game/sport) is the one common verb with a u\u2192ue change. These patterns show up constantly when talking about hobbies: Quiero jugar, \u00BFPuedes nadar conmigo?",
+            table:{headers:["Pronoun","querer (e\u2192ie)","poder (o\u2192ue)","jugar (u\u2192ue)"], rows:[
+              ["yo","quiero","puedo","juego"],
+              ["t\u00FA","quieres","puedes","juegas"],
+              ["usted/\u00E9l/ella","quiere","puede","juega"],
+              ["nosotros/as","queremos","podemos","jugamos"],
+              ["ustedes/ellos/as","quieren","pueden","juegan"]
+            ]},
+            examples:[
+              {es:"Quiero jugar al f\u00FAtbol contigo.", en:"I want to play soccer with you."},
+              {es:"\u00BFPuedes esquiar este invierno?", en:"Can you ski this winter?"},
+              {es:"Nosotros jugamos los s\u00E1bados.", en:"We play on Saturdays. (no stem change here!)"}
+            ]
+          }
+        ],
+        mistakes:[
+          "With gustar + infinitive, don't switch to gustan just because you list two activities \u2014 Me gusta nadar y leer stays singular, because it's treated as one combined idea.",
+          "Don't stem-change the nosotros/vosotros forms \u2014 jugamos and queremos keep their original vowel; only the other four forms shift."
+        ]
+      },
+      quiz:[
+        {q:"Complete: \u201CMe ___ nadar y jugar al f\u00FAtbol.\u201D", choices:["gusta","gustan","gustas","gustamos"], a:0, cat:"Gram\u00E1tica"},
+        {q:"\u201CHace fr\u00EDo\u201D means...", choices:["It's hot","It's raining","It's cold","It's snowing"], a:2, cat:"Vocabulario"},
+        {q:"Which verb means \u201Cto rain\u201D?", choices:["nevar","llover","esquiar","nadar"], a:1, cat:"Vocabulario"},
+        {q:"\u201CEl tiempo libre\u201D means...", choices:["the weather","free time","the schedule","the season"], a:1, cat:"Vocabulario"},
+        {q:"\u201CYo\u201D form of querer?", choices:["quero","quiero","queremos","quieres"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Which form of jugar does NOT stem-change?", choices:["yo","t\u00FA","nosotros","ellos"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CPuedo\u201D comes from which verb?", choices:["pedir","poder","poner","preferir"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CEst\u00E1 nublado\u201D uses which verb, unlike most weather expressions?", choices:["hacer","tener","estar","ser"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CMontar en bicicleta\u201D means...", choices:["to drive a car","to ride a bike","to run","to swim"], a:1, cat:"Vocabulario"},
+        {q:"In July, the seasons in Chile are reversed from Texas because...", choices:["Chile is closer to the equator","Chile is in the Southern Hemisphere","Chile has a different calendar","Chile is on a different continent"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Chile",
+        facts:{capital:"Santiago", population:"\u224819.5 millones", language:"Espa\u00F1ol", extra:"Se extiende m\u00E1s de 4,300 km de norte a sur"},
+        note:"Chile is an extraordinarily long, narrow country that stretches from the bone-dry Atacama Desert in the north to glaciers and fjords in the south \u2014 and because it sits in the Southern Hemisphere, its seasons are flipped from ours. That means while Texas swelters in July, Chileans are skiing in major Andes resorts like Portillo; their summer break falls around December through February instead of June through August. F\u00FAtbol and skiing are both hugely popular national pastimes, and Chile's geography also makes it one of the best places on Earth for astronomy \u2014 its clear, dry northern skies host some of the world's most powerful telescopes."
+      }
+    },
+    {
+      id:"l1-7", title:"La Rutina Diaria", en:"Daily Routine",
+      teksFocus:"Interpretive Communication", country:"Costa Rica",
+      vocab:[
+        {es:"despertarse", en:"to wake up", pron:"dehs-pehr-TAR-seh"},
+        {es:"levantarse", en:"to get up", pron:"leh-vahn-TAR-seh"},
+        {es:"ducharse", en:"to shower", pron:"doo-CHAR-seh"},
+        {es:"lavarse los dientes", en:"to brush one's teeth", pron:"lah-VAR-seh lohs DYEHN-tehs"},
+        {es:"peinarse", en:"to comb one's hair", pron:"pay-NAR-seh"},
+        {es:"vestirse", en:"to get dressed", pron:"vehs-TEER-seh"},
+        {es:"desayunar", en:"to eat breakfast", pron:"deh-sah-yoo-NAR"},
+        {es:"salir de casa", en:"to leave the house", pron:"sah-LEER deh KAH-sah"},
+        {es:"relajarse", en:"to relax", pron:"reh-lah-HAR-seh"},
+        {es:"acostarse", en:"to go to bed", pron:"ah-kohs-TAR-seh"},
+        {es:"dormirse", en:"to fall asleep", pron:"dor-MEER-seh"},
+        {es:"siempre / nunca", en:"always / never", pron:"SYEHM-preh / NOON-kah"},
+        {es:"todos los d\u00EDas", en:"every day", pron:"TOH-dohs lohs DEE-ahs"},
+        {es:"a veces", en:"sometimes", pron:"ah VEH-sehs"},
+        {es:"temprano / tarde", en:"early / late", pron:"tehm-PRAH-noh / TAR-deh"},
+        {es:"luego / despu\u00E9s", en:"then / afterward", pron:"LWEH-goh / dehs-PWEHS"}
+      ],
+      phrases:[
+        {es:"\u00BFA qu\u00E9 hora te despiertas?", en:"What time do you wake up?"},
+        {es:"Primero me ducho, luego desayuno.", en:"First I shower, then I eat breakfast."},
+        {es:"Nunca llego tarde.", en:"I'm never late."},
+        {es:"Los fines de semana, me despierto tarde.", en:"On weekends, I wake up late."},
+        {es:"Me relajo viendo la tele.", en:"I relax by watching TV."},
+        {es:"\u00A1Es hora de dormir!", en:"It's time to sleep!"}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Reflexive Verbs",
+            body:"Reflexive verbs describe actions you do to yourself, marked by the pronoun -se on the infinitive (despertarse). Conjugate the verb normally and add a matching reflexive pronoun before it: me despierto (I wake myself up), te despiertas, se despierta, nos despertamos, se despiertan. The pronoun usually goes right before the conjugated verb \u2014 it's easy to forget, but without it the sentence changes meaning (despertar without \u201Cse\u201D means to wake someone ELSE up, not yourself).",
+            table:{headers:["Pronoun","Reflexive pronoun","levantarse"], rows:[
+              ["yo","me","me levanto"],
+              ["t\u00FA","te","te levantas"],
+              ["usted/\u00E9l/ella","se","se levanta"],
+              ["nosotros/as","nos","nos levantamos"],
+              ["ustedes/ellos/as","se","se levantan"]
+            ]},
+            examples:[
+              {es:"Me levanto a las seis todos los d\u00EDas.", en:"I get up at six every day."},
+              {es:"\u00BFA qu\u00E9 hora te acuestas?", en:"What time do you go to bed?"},
+              {es:"Mi pap\u00E1 se ducha y se viste r\u00E1pido.", en:"My dad showers and gets dressed quickly."},
+              {es:"Nos relajamos los domingos.", en:"We relax on Sundays."}
+            ]
+          },
+          {
+            title:"Sequencing Words for Routines",
+            body:"To narrate a routine clearly, Spanish leans on a small set of connector words rather than a special verb tense: primero (first), luego / despu\u00E9s (then/afterward), m\u00E1s tarde (later), y finalmente (and finally). Combined with frequency words like siempre, a veces, and nunca, these let you describe an entire day in order without needing any new grammar \u2014 just the present tense you already know, organized clearly.",
+            table:null,
+            examples:[
+              {es:"Primero me despierto, luego me ducho y despu\u00E9s desayuno.", en:"First I wake up, then I shower, and afterward I eat breakfast."},
+              {es:"A veces estudio por la noche.", en:"Sometimes I study at night."},
+              {es:"Finalmente, me acuesto a las diez.", en:"Finally, I go to bed at ten."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't drop the reflexive pronoun out of habit from English \u2014 \u201CDucho a las siete\u201D is incomplete; you need me ducho to say \u201CI shower (myself).\u201D",
+          "The reflexive pronoun moves with the subject (me, te, se, nos, se) \u2014 it doesn't stay as \u201Cse\u201D for every person the way some learners assume."
+        ]
+      },
+      quiz:[
+        {q:"Which reflexive pronoun matches \u201Cnosotros\u201D?", choices:["se","te","nos","me"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CMe acuesto a las diez\u201D means...", choices:["I wake up at ten","I get up at ten","I go to bed at ten","I shower at ten"], a:2, cat:"Vocabulario"},
+        {q:"\u201CTodos los d\u00EDas\u201D means...", choices:["sometimes","every day","never","early"], a:1, cat:"Vocabulario"},
+        {q:"Without the pronoun \u201Cse,\u201D despertar means...", choices:["to sleep","to wake someone else up","to get dressed","to rest"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CSe levanta\u201D matches which subject?", choices:["yo","t\u00FA","usted/\u00E9l/ella","nosotros"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CLuego\u201D is closest in meaning to...", choices:["first","then","never","always"], a:1, cat:"Vocabulario"},
+        {q:"\u201CLavarse los dientes\u201D means...", choices:["to wash your face","to brush your teeth","to comb your hair","to take a shower"], a:1, cat:"Vocabulario"},
+        {q:"Which word means \u201Csometimes\u201D?", choices:["siempre","nunca","a veces","tarde"], a:2, cat:"Vocabulario"},
+        {q:"Reflexive pronouns are placed...", choices:["after the verb always","before the conjugated verb","at the end of the sentence","they're optional"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CPura vida\u201D is a phrase closely associated with...", choices:["Argentina","Espa\u00F1a","Costa Rica","Cuba"], a:2, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Costa Rica",
+        facts:{capital:"San Jos\u00E9", population:"\u22485.2 millones", language:"Espa\u00F1ol", extra:"Sin ej\u00E9rcito desde 1948"},
+        note:"\u201CPura vida\u201D (\u201Cpure life\u201D) is more than a greeting in Costa Rica \u2014 it's used as hello, goodbye, thank you, and a daily philosophy about staying relaxed and appreciating simple routines. Costa Rica also abolished its army in 1948 and redirected that funding toward education and the environment; today roughly a quarter of its land is protected as national parks or reserves, one of the highest percentages anywhere on Earth. This conservation-first approach shapes daily routines too: many Costa Ricans build outdoor time, fresh fruit at breakfast, and a generally unhurried pace into their everyday schedule, which locals often credit as part of why Costa Rica consistently ranks among the happiest countries in the region."
+      }
+    },
+    {
+      id:"l1-8", title:"La Casa, la Ropa y los Colores", en:"House, Clothing & Colors",
+      teksFocus:"Presentational Communication", country:"Guatemala",
+      vocab:[
+        {es:"la casa / el apartamento", en:"house / apartment", pron:"lah KAH-sah"},
+        {es:"el dormitorio", en:"bedroom", pron:"el dor-mee-TOH-ryoh"},
+        {es:"la cocina", en:"kitchen", pron:"lah koh-SEE-nah"},
+        {es:"el ba\u00F1o / la sala", en:"bathroom / living room", pron:"el BAH-nyoh / lah SAH-lah"},
+        {es:"llevar", en:"to wear", pron:"yeh-VAR"},
+        {es:"los pantalones", en:"pants", pron:"lohs pan-tah-LOH-nehs"},
+        {es:"la camisa / la camiseta", en:"shirt / t-shirt", pron:"lah kah-MEE-sah"},
+        {es:"el vestido / la falda", en:"dress / skirt", pron:"el vehs-TEE-doh"},
+        {es:"los zapatos", en:"shoes", pron:"lohs sah-PAH-tohs"},
+        {es:"la chaqueta", en:"jacket", pron:"lah chah-KEH-tah"},
+        {es:"rojo / azul / verde", en:"red / blue / green", pron:"ROH-hoh / ah-SOOL / VEHR-deh"},
+        {es:"amarillo / negro / blanco", en:"yellow / black / white", pron:"ah-mah-REE-yoh"},
+        {es:"morado / anaranjado", en:"purple / orange", pron:"moh-RAH-doh"},
+        {es:"barato / caro", en:"cheap / expensive", pron:"bah-RAH-toh / KAH-roh"},
+        {es:"nuevo / viejo", en:"new / old", pron:"NWEH-voh / VYEH-hoh"},
+        {es:"de moda", en:"in style, trendy", pron:"deh MOH-dah"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 vas a llevar hoy?", en:"What are you going to wear today?"},
+        {es:"Me queda bien / mal.", en:"It fits me well / badly."},
+        {es:"Esta camisa est\u00E1 de moda.", en:"This shirt is trendy."},
+        {es:"\u00BFTienes esto en otro color?", en:"Do you have this in another color?"},
+        {es:"Mi cuarto favorito es la cocina.", en:"My favorite room is the kitchen."},
+        {es:"Combina bien con tus zapatos.", en:"It matches well with your shoes."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Color Agreement & Llevar (to wear)",
+            body:"Colors are adjectives, so they agree with the noun just like other descriptions: una camisa roja, unos pantalones rojos. Colors ending in a consonant (azul, verde) usually only change for number, not gender: una camisa azul, unos pantalones azules. Llevar (to wear) is a regular -ar verb: llevo, llevas, lleva, llevamos, llevan \u2014 don't confuse it with tener, which means \u201Cto own/have,\u201D not \u201Cto have on.\u201D Llevar can also mean \u201Cto carry,\u201D so context (clothing vs. an object) clarifies the meaning.",
+            table:{headers:["Color type","Masc. sing.","Fem. sing.","Plural"], rows:[
+              ["-o colors","rojo","roja","rojos/as"],
+              ["consonant colors","azul","azul","azules"],
+              ["-a colors (invariable)","naranja","naranja","naranjas"]
+            ]},
+            examples:[
+              {es:"Llevo una camisa azul hoy.", en:"I'm wearing a blue shirt today."},
+              {es:"Mi dormitorio tiene paredes verdes.", en:"My bedroom has green walls."},
+              {es:"Esos pantalones son baratos.", en:"Those pants are cheap."},
+              {es:"Ella lleva zapatos nuevos.", en:"She is wearing new shoes."}
+            ]
+          },
+          {
+            title:"Demonstrative Adjectives (this/that)",
+            body:"Spanish has three \u201Clevels\u201D of distance for \u201Cthis/that,\u201D where English only has two. Este/esta (this) is near the speaker; ese/esa (that) is near the listener or a medium distance; aquel/aquella (that, over there) is far from both people. All four forms agree in gender and number with the noun they describe, which makes them function more like regular adjectives than English \u201Cthis/that\u201D do.",
+            table:{headers:["Distance","Masc. sing.","Fem. sing.","Masc. pl.","Fem. pl."], rows:[
+              ["this (near me)","este","esta","estos","estas"],
+              ["that (near you)","ese","esa","esos","esas"],
+              ["that (over there)","aquel","aquella","aquellos","aquellas"]
+            ]},
+            examples:[
+              {es:"Me gusta esta camisa.", en:"I like this shirt. (near me)"},
+              {es:"\u00BFCu\u00E1nto cuesta ese vestido?", en:"How much is that dress? (near you)"},
+              {es:"Aquella casa es de mis abuelos.", en:"That house over there belongs to my grandparents."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Color words ending in -a, like naranja and rosa, often don't change at all for gender or number in casual speech \u2014 don't force an -o/-a switch onto every color.",
+          "Don't use ese for something far away from both speakers \u2014 that's specifically what aquel is for; ese is for something near the person you're talking to."
+        ]
+      },
+      quiz:[
+        {q:"Correct agreement: \u201Cuna camisa ___\u201D (red)", choices:["rojo","rojos","roja","rojas"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CLlevar\u201D in this context means...", choices:["to carry only","to own","to wear","to buy"], a:2, cat:"Vocabulario"},
+        {q:"Which room is \u201Cla cocina\u201D?", choices:["bedroom","kitchen","bathroom","living room"], a:1, cat:"Vocabulario"},
+        {q:"\u201CBarato\u201D means the opposite of...", choices:["bonito","caro","grande","nuevo"], a:1, cat:"Vocabulario"},
+        {q:"\u201CEste\u201D refers to something...", choices:["near the speaker","near the listener","far from both","always plural"], a:0, cat:"Gram\u00E1tica"},
+        {q:"Which form means \u201Cthat over there\u201D (far from both people)?", choices:["este","ese","aquel","esta"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CEsos zapatos\u201D agrees with a noun that is...", choices:["singular, masculine","plural, masculine","plural, feminine","singular, feminine"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CDe moda\u201D means...", choices:["out of style","trendy","expensive","handmade"], a:1, cat:"Vocabulario"},
+        {q:"Which color typically does NOT change for gender?", choices:["rojo","blanco","negro","azul"], a:3, cat:"Gram\u00E1tica"},
+        {q:"Traditional Guatemalan huipiles are known for their...", choices:["plain white fabric","hand-woven colorful patterns","leather material","factory-made designs"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Guatemala",
+        facts:{capital:"Ciudad de Guatemala", population:"\u224818 millones", language:"Espa\u00F1ol + 20+ idiomas mayas", extra:"Hogar de Tikal, ciudad maya antigua"},
+        note:"In Guatemala, many Maya communities keep alive the tradition of weaving huipiles \u2014 blouses with intricate, hand-woven patterns where the colors and designs can identify exactly which town the weaver is from, almost like a textile signature. It's a living art form passed down through generations, not a costume, and the textiles are sold and worn as everyday clothing across the country, especially in the western highlands. Guatemala is also home to Tikal, one of the largest and most thoroughly excavated ancient Maya cities, with temple-pyramids that rise above the rainforest canopy, and the country recognizes more than twenty distinct Mayan languages alongside Spanish."
+      }
+    }
+  ]
+},
+level2: {
+  name:"Spanish II", code:"TEKS \u00A7114.40", proficiency:"Novice High \u2192 Intermediate Low",
+  units:[
+    {
+      id:"l2-1", title:"Ser vs. Estar y la Personalidad", en:"Ser vs. Estar & Personality",
+      teksFocus:"Presentational Communication", country:"Colombia",
+      vocab:[
+        {es:"estar", en:"to be (location/state)", pron:"ehs-TAR"},
+        {es:"cansado / cansada", en:"tired", pron:"kahn-SAH-doh"},
+        {es:"contento / contenta", en:"happy, content", pron:"kohn-TEHN-toh"},
+        {es:"enojado / enojada", en:"angry", pron:"eh-noh-HAH-doh"},
+        {es:"preocupado / preocupada", en:"worried", pron:"preh-oh-koo-PAH-doh"},
+        {es:"ser de", en:"to be from", pron:"sehr deh"},
+        {es:"la personalidad", en:"personality", pron:"lah pehr-soh-nah-lee-DAHD"},
+        {es:"generoso / generosa", en:"generous", pron:"heh-neh-ROH-soh"},
+        {es:"honesto / honesta", en:"honest", pron:"oh-NEHS-toh"},
+        {es:"paciente / impaciente", en:"patient / impatient", pron:"pah-SYEHN-teh"},
+        {es:"extrovertido / introvertido", en:"outgoing / introverted", pron:"ehks-troh-vehr-TEE-doh"},
+        {es:"perezoso / perezosa", en:"lazy", pron:"peh-reh-SOH-soh"},
+        {es:"curioso / curiosa", en:"curious", pron:"koo-RYOH-soh"},
+        {es:"confiable", en:"reliable, trustworthy", pron:"kohn-FYAH-bleh"},
+        {es:"sensible", en:"sensitive", pron:"sehn-SEE-bleh"},
+        {es:"orgulloso / orgullosa", en:"proud", pron:"or-goo-YOH-soh"}
+      ],
+      phrases:[
+        {es:"\u00BFC\u00F3mo eres?", en:"What are you like? (personality)"},
+        {es:"\u00BFC\u00F3mo est\u00E1s hoy?", en:"How are you (feeling) today?"},
+        {es:"Se lleva bien con todos.", en:"He/she gets along well with everyone."},
+        {es:"Estoy de buen / mal humor.", en:"I'm in a good / bad mood."},
+        {es:"Es de muy buen coraz\u00F3n.", en:"He/she is very kind-hearted."},
+        {es:"No es para tanto.", en:"It's not a big deal."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Ser vs. Estar",
+            body:"Both mean \u201Cto be,\u201D but they're not interchangeable. Use ser for things that are generally permanent or define identity: personality, origin, profession, physical traits (Es generosa. Es de Bogot\u00E1.). Use estar for temporary states, conditions, emotions, and location \u2014 things that can change (Est\u00E1 cansada hoy. Bogot\u00E1 est\u00E1 en Colombia.). A helpful trick: the same adjective can mean different things with each verb \u2014 Es aburrido means \u201Che is boring\u201D (a fixed trait), while Est\u00E1 aburrido means \u201Che is bored\u201D (a passing feeling). A common shorthand teachers use: DOCTOR for estar (Description-of-feeling, Orientation/location, Condition, Temporary, Ongoing actions, Reaction) versus PLACE-ish acronyms for ser (Profession, Location-of-origin, Association, Characteristic, Eventos/time) \u2014 but the real test is always permanent-vs-changeable, not the acronym.",
+            table:{headers:["Use ser for","Use estar for"], rows:[
+              ["personality & identity","emotions & moods"],
+              ["origin (de)","location (current)"],
+              ["profession","physical condition"],
+              ["physical traits","ongoing actions (-ando/-iendo)"]
+            ]},
+            examples:[
+              {es:"Mi amiga es muy paciente y generosa.", en:"My friend is very patient and generous. (personality)"},
+              {es:"Hoy estoy cansado porque trabaj\u00E9 mucho.", en:"Today I'm tired because I worked a lot. (temporary state)"},
+              {es:"\u00C9l es aburrido, pero ahora mismo no est\u00E1 aburrido.", en:"He is boring, but right now he isn't bored."},
+              {es:"Bogot\u00E1 est\u00E1 en los Andes.", en:"Bogot\u00E1 is in the Andes. (location)"}
+            ]
+          },
+          {
+            title:"Present Progressive: Estar + Gerundio",
+            body:"To describe an action happening RIGHT NOW (\u201Cis/am -ing\u201D in English), use estar conjugated, plus a gerund form of the main verb. For -ar verbs, form the gerund by adding -ando to the stem (hablar \u2192 hablando); for -er/-ir verbs, add -iendo (comer \u2192 comiendo, vivir \u2192 viviendo). This construction is more narrowly used in Spanish than English \u2014 Spanish often prefers the simple present (Estudio espa\u00F1ol) where English would naturally say \u201CI'm studying Spanish,\u201D and the progressive is reserved specifically for actions in progress at this exact moment.",
+            table:{headers:["Verb","Gerund","Example"], rows:[
+              ["hablar","hablando","Estoy hablando con mi amiga."],
+              ["comer","comiendo","Est\u00E1 comiendo ahora."],
+              ["escribir","escribiendo","Estamos escribiendo una carta."],
+              ["leer (irregular)","leyendo","\u00C9l est\u00E1 leyendo."]
+            ]},
+            examples:[
+              {es:"Estoy estudiando para el examen.", en:"I am studying for the exam (right now)."},
+              {es:"\u00BFQu\u00E9 est\u00E1s haciendo?", en:"What are you doing (right now)?"},
+              {es:"Est\u00E1n escuchando m\u00FAsica colombiana.", en:"They are listening to Colombian music."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't use estar for inherent characteristics that won't change, like nationality or material (es de Colombia, not est\u00E1 de Colombia).",
+          "Verbs like leer, traer, and o\u00EDr need a y instead of i in the gerund (leyendo, not \u201Cleiendo\u201D) because Spanish avoids an unstressed i between two vowels."
+        ]
+      },
+      quiz:[
+        {q:"Which verb for permanent traits/origin?", choices:["estar","ser","tener","hacer"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CEstoy cansada\u201D describes...", choices:["a permanent trait","where I'm from","a temporary state","my profession"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CEs de Bogot\u00E1\u201D means...", choices:["He is in Bogot\u00E1 right now","He is from Bogot\u00E1","He is tired in Bogot\u00E1","He likes Bogot\u00E1"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CEst\u00E1 aburrido\u201D (vs. \u201Ces aburrido\u201D) means he is...", choices:["boring","bored","happy","patient"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"Gerund of \u201Cvivir\u201D?", choices:["viviendo","vivando","viviiendo","vivendo"], a:0, cat:"Gram\u00E1tica"},
+        {q:"Gerund of \u201Cleer\u201D (irregular)?", choices:["leiendo","leyendo","leendo","leyiendo"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CEstoy hablando\u201D means...", choices:["I speak","I spoke","I am speaking","I will speak"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CExtrovertido\u201D is the opposite of...", choices:["confiable","introvertido","perezoso","sensible"], a:1, cat:"Vocabulario"},
+        {q:"\u201CPreocupado\u201D means...", choices:["proud","worried","lazy","curious"], a:1, cat:"Vocabulario"},
+        {q:"Colombia's regions \u2014 Caribbean coast, Andes, Amazon \u2014 are known for having...", choices:["identical cultures everywhere","very distinct regional cultures and accents","no regional differences","only one major city"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Colombia",
+        facts:{capital:"Bogot\u00E1", population:"\u224852 millones", language:"Espa\u00F1ol", extra:"Eje Cafetero, Patrimonio de la UNESCO"},
+        note:"Colombia's geography \u2014 Caribbean coastline, Andean cities, Pacific jungle, and Amazon rainforest all in one country \u2014 produces noticeably different regional accents, music, and food traditions; a person from Cartagena and a person from Bogot\u00E1 can sound almost like they're speaking different dialects. Its coffee-growing region (the Eje Cafetero) is a UNESCO World Heritage site, prized for the steep mountain terrain that produces some of the world's most sought-after beans. Nobel Prize\u2013winning author Gabriel Garc\u00EDa M\u00E1rquez drew heavily on Colombian history, folklore, and his own hometown to help define the literary style known as magical realism, where extraordinary events are described as casually as everyday life."
+      }
+    },
+    {
+      id:"l2-2", title:"El Pret\u00E9rito: Narrando el Pasado", en:"Preterite: Narrating the Past",
+      teksFocus:"Presentational Communication", country:"Rep\u00FAblica Dominicana",
+      vocab:[
+        {es:"bail\u00E9 (bailar)", en:"I danced", pron:"bai-LEH"},
+        {es:"com\u00ED (comer)", en:"I ate", pron:"koh-MEE"},
+        {es:"escrib\u00ED (escribir)", en:"I wrote", pron:"ehs-kree-BEE"},
+        {es:"fui (ir / ser)", en:"I went / I was", pron:"fwee"},
+        {es:"hice (hacer)", en:"I did / made", pron:"EE-seh"},
+        {es:"tuve (tener)", en:"I had", pron:"TOO-veh"},
+        {es:"estuve (estar)", en:"I was / I was located", pron:"ehs-TOO-veh"},
+        {es:"vi (ver)", en:"I saw", pron:"vee"},
+        {es:"compr\u00E9 (comprar)", en:"I bought", pron:"kohm-PREH"},
+        {es:"lleg\u00E9 (llegar)", en:"I arrived", pron:"yeh-GEH"},
+        {es:"ayer", en:"yesterday", pron:"ah-YEHR"},
+        {es:"anoche", en:"last night", pron:"ah-NOH-cheh"},
+        {es:"la semana pasada", en:"last week", pron:"lah seh-MAH-nah pah-SAH-dah"},
+        {es:"el a\u00F1o pasado", en:"last year", pron:"el AH-nyoh pah-SAH-doh"},
+        {es:"una vez", en:"once, one time", pron:"OO-nah vehs"},
+        {es:"de repente", en:"suddenly", pron:"deh reh-PEHN-teh"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 hiciste el fin de semana?", en:"What did you do this weekend?"},
+        {es:"Fue una fiesta incre\u00EDble.", en:"It was an incredible party."},
+        {es:"Nunca hab\u00EDa bailado merengue antes.", en:"I had never danced merengue before. (preview of past perfect)"},
+        {es:"Llegu\u00E9 tarde a la escuela.", en:"I arrived late to school."},
+        {es:"\u00A1No lo pod\u00EDa creer!", en:"I couldn't believe it!"},
+        {es:"Todo sali\u00F3 bien.", en:"Everything turned out well."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Regular Preterite (-ar, -er/-ir)",
+            body:"The preterite describes completed actions in the past \u2014 things that started and finished at a specific point. Regular -ar verbs end in -\u00E9, -aste, -\u00F3, -amos, -aron (bail\u00E9, bailaste, bail\u00F3...); -er/-ir verbs share endings: -\u00ED, -iste, -i\u00F3, -imos, -ieron (com\u00ED, comiste, comi\u00F3...). Notice the yo and usted/\u00E9l/ella forms both carry accent marks on -ar verbs (bail\u00E9, bail\u00F3) \u2014 those accents aren't decorative, they're what distinguishes preterite from present tense in writing.",
+            table:{headers:["Pronoun","bailar (-ar)","comer (-er)","escribir (-ir)"], rows:[
+              ["yo","bail\u00E9","com\u00ED","escrib\u00ED"],
+              ["t\u00FA","bailaste","comiste","escribiste"],
+              ["usted/\u00E9l/ella","bail\u00F3","comi\u00F3","escribi\u00F3"],
+              ["nosotros/as","bailamos","comimos","escribimos"],
+              ["ustedes/ellos/as","bailaron","comieron","escribieron"]
+            ]},
+            examples:[
+              {es:"Ayer bail\u00E9 merengue en una fiesta.", en:"Yesterday I danced merengue at a party."},
+              {es:"\u00BFComiste algo rico anoche?", en:"Did you eat something good last night?"},
+              {es:"Mis amigos escribieron canciones nuevas.", en:"My friends wrote new songs."}
+            ]
+          },
+          {
+            title:"Irregular Preterite: The \u201CStem-Changing\u201D Family",
+            body:"A cluster of common verbs shares one irregular pattern in the preterite: an altered stem, plus its own special set of endings (-e, -iste, -o, -imos, -ieron) that, notably, carry NO accent marks, unlike the regular endings above. Two of the most useful irregulars on their own: ir and ser share the exact same preterite forms (fui, fuiste, fue, fuimos, fueron) \u2014 only context tells you which verb is meant. Hacer becomes hice, hiciste, hizo (note the z, not c, in the usted/\u00E9l/ella form!), hicimos, hicieron.",
+            table:{headers:["Infinitive","New stem","yo form"], rows:[
+              ["tener","tuv-","tuve"],
+              ["estar","estuv-","estuve"],
+              ["poder","pud-","pude"],
+              ["poner","pus-","puse"],
+              ["decir","dij-","dije (-ieron \u2192 -eron)"]
+            ]},
+            examples:[
+              {es:"Fui al mercado y compr\u00E9 fruta.", en:"I went to the market and bought fruit."},
+              {es:"\u00BFQu\u00E9 hiciste anoche?", en:"What did you do last night?"},
+              {es:"Tuve que estudiar toda la semana pasada.", en:"I had to study all last week."},
+              {es:"Estuvieron en la playa el a\u00F1o pasado.", en:"They were at the beach last year."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't forget the accent marks on regular -ar/-er/-ir preterite endings (bail\u00E9 vs. baile) \u2014 without them, you've accidentally written a different verb form entirely.",
+          "Irregular preterite stems (tuve, estuve, hice...) take endings WITHOUT accent marks \u2014 mixing the two systems (e.g., writing \u201Ctuv\u00E9\u201D) is a very common error."
+        ]
+      },
+      quiz:[
+        {q:"\u201CYo\u201D preterite ending for -ar verbs?", choices:["-o","-\u00E9","-aste","-amos"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CFui\u201D can mean...", choices:["I go OR I am","I went OR I was","I will go","I was going"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Correct preterite of \u201Chacer\u201D (yo)?", choices:["hac\u00ED","hic\u00ED","hice","hago"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CLa semana pasada\u201D means...", choices:["next week","this week","last week","every week"], a:2, cat:"Vocabulario"},
+        {q:"Preterite stem of \u201Ctener\u201D?", choices:["ten-","tuv-","tien-","tuve-"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Irregular preterite endings (tuve, estuve...) carry...", choices:["accent marks always","no accent marks","accents only in nosotros","accents only in yo"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CDe repente\u201D means...", choices:["slowly","suddenly","never","often"], a:1, cat:"Vocabulario"},
+        {q:"\u201CCompr\u00E9\u201D comes from which infinitive?", choices:["comprar","comprender","competir","comparar"], a:0, cat:"Vocabulario"},
+        {q:"Which sentence is correctly accented?", choices:["Bailo ayer.","Baile ayer.","Bail\u00E9 ayer.","Bailar ayer."], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"Merengue and bachata, two iconic music styles, originated in...", choices:["Argentina","Rep\u00FAblica Dominicana","Espa\u00F1a","Chile"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Rep\u00FAblica Dominicana",
+        facts:{capital:"Santo Domingo", population:"\u224811.3 millones", language:"Espa\u00F1ol", extra:"Primera ciudad europea permanente en las Am\u00E9ricas"},
+        note:"Merengue and bachata, two of the most internationally popular Latin music genres, both originated in the Dominican Republic \u2014 merengue's fast, accordion-driven sound dates back to the 1800s, while bachata grew out of guitar-based folk music in the 20th century before becoming a global pop phenomenon. The country has also sent an extraordinary number of players to U.S. Major League Baseball relative to its population, making the sport a major source of national pride and a real pathway to professional opportunity for many young Dominicans. Santo Domingo, the capital, is home to the oldest continuously inhabited European-founded city in the Americas, with a colonial zone that's also a UNESCO World Heritage site."
+      }
+    },
+    {
+      id:"l2-3", title:"El Imperfecto: Recuerdos de la Ni\u00F1ez", en:"Imperfect: Childhood Memories",
+      teksFocus:"Presentational Communication", country:"Honduras",
+      vocab:[
+        {es:"era (ser)", en:"I/he/she used to be", pron:"EH-rah"},
+        {es:"iba (ir)", en:"I/he/she used to go", pron:"EE-bah"},
+        {es:"ve\u00EDa (ver)", en:"I/he/she used to see/watch", pron:"veh-EE-ah"},
+        {es:"jugaba (jugar)", en:"I/he/she used to play", pron:"hoo-GAH-bah"},
+        {es:"viv\u00EDa (vivir)", en:"I/he/she used to live", pron:"vee-VEE-ah"},
+        {es:"ten\u00EDa (tener)", en:"I/he/she used to have", pron:"teh-NEE-ah"},
+        {es:"so\u00F1aba (so\u00F1ar)", en:"I/he/she used to dream", pron:"soh-NYAH-bah"},
+        {es:"de ni\u00F1o / de ni\u00F1a", en:"as a child", pron:"deh NEE-nyoh"},
+        {es:"de peque\u00F1o / de peque\u00F1a", en:"when little", pron:"deh peh-KEH-nyoh"},
+        {es:"siempre", en:"always", pron:"SYEHM-preh"},
+        {es:"todo el tiempo", en:"all the time", pron:"TOH-doh el TYEHM-poh"},
+        {es:"antes", en:"before, in the past", pron:"AHN-tehs"},
+        {es:"mientras", en:"while", pron:"MYEHN-trahs"},
+        {es:"cuando", en:"when", pron:"KWAHN-doh"},
+        {es:"los recuerdos", en:"memories", pron:"lohs reh-KWEHR-dohs"},
+        {es:"extra\u00F1ar", en:"to miss (someone/something)", pron:"ehks-trah-NYAR"}
+      ],
+      phrases:[
+        {es:"\u00BFC\u00F3mo eras de ni\u00F1o/a?", en:"What were you like as a child?"},
+        {es:"Siempre jugaba afuera.", en:"I always used to play outside."},
+        {es:"Extra\u00F1o esos d\u00EDas.", en:"I miss those days."},
+        {es:"Mientras estudiaba, escuchaba m\u00FAsica.", en:"While I studied, I listened to music."},
+        {es:"Antes no hab\u00EDa internet.", en:"Before, there wasn't internet."},
+        {es:"Ten\u00EDa muchos amigos en la escuela.", en:"I used to have a lot of friends at school."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Imperfect Tense Formation",
+            body:"The imperfect describes ongoing, repeated, or background actions in the past \u2014 \u201Cused to\u201D or \u201Cwas/were -ing.\u201D -ar verbs end in -aba, -abas, -aba, -\u00E1bamos, -aban; -er/-ir verbs share endings: -\u00EDa, -\u00EDas, -\u00EDa, -\u00EDamos, -\u00EDan. There are only three irregular verbs in the ENTIRE imperfect tense \u2014 every other Spanish verb, no matter how irregular elsewhere, follows this pattern perfectly. That makes the imperfect one of the most forgiving tenses to learn.",
+            table:{headers:["Pronoun","jugar (-ar)","vivir (-er/-ir)","ser (irregular)"], rows:[
+              ["yo","jugaba","viv\u00EDa","era"],
+              ["t\u00FA","jugabas","viv\u00EDas","eras"],
+              ["usted/\u00E9l/ella","jugaba","viv\u00EDa","era"],
+              ["nosotros/as","jug\u00E1bamos","viv\u00EDamos","\u00E9ramos"],
+              ["ustedes/ellos/as","jugaban","viv\u00EDan","eran"]
+            ]},
+            examples:[
+              {es:"De ni\u00F1a, viv\u00EDa cerca de las ruinas de Cop\u00E1n.", en:"As a child, I used to live near the Cop\u00E1n ruins."},
+              {es:"Mis abuelos jugaban f\u00FAtbol cada tarde.", en:"My grandparents used to play soccer every afternoon."},
+              {es:"\u00C9ramos muy curiosos de ni\u00F1os.", en:"We were very curious as kids."}
+            ]
+          },
+          {
+            title:"Pret\u00E9rito vs. Imperfecto",
+            body:"This is the single biggest grammar leap in Spanish II: choosing the right past tense. Imperfect sets the scene, describes a habit, or gives background information \u2014 it answers \u201Cwhat was generally going on?\u201D Preterite marks a specific, completed event, often one that interrupts the background scene \u2014 it answers \u201Cwhat happened at that moment?\u201D They frequently appear together in the same sentence, with mientras or cuando connecting them: the imperfect paints the backdrop, and the preterite is the single brushstroke of action.",
+            table:{headers:["Imperfecto (background)","Pret\u00E9rito (event)"], rows:[
+              ["Llov\u00EDa (it was raining)","cuando sal\u00ED (when I left)"],
+              ["Era de noche (it was night)","cuando lleg\u00F3 (when he arrived)"],
+              ["Jugaba en el parque (I was playing)","cuando me ca\u00ED (when I fell)"]
+            ]},
+            examples:[
+              {es:"Cuando era ni\u00F1o, jugaba todos los d\u00EDas, pero un d\u00EDa me romp\u00ED el brazo.", en:"When I was a kid, I used to play every day, but one day I broke my arm."},
+              {es:"Mientras jugaba, empez\u00F3 a llover.", en:"While I was playing, it started to rain."},
+              {es:"Antes \u00EDbamos a la playa todos los veranos, hasta que nos mudamos.", en:"Before, we used to go to the beach every summer, until we moved."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't assume \u201Cused to\u201D always needs the imperfect \u2014 a habitual action that you're now stating as a single completed fact in a narrative (\u201CI lived there for ten years\u201D, a finished chunk of time) can take the preterite instead, depending on what you're emphasizing.",
+          "The imperfect of hay (there is/are) is hab\u00EDa, not \u201Chab\u00EDan\u201D \u2014 it stays singular even when describing multiple things: Hab\u00EDa muchos ni\u00F1os en el parque."
+        ]
+      },
+      quiz:[
+        {q:"How many irregular verbs exist in the imperfect tense?", choices:["0","3","5","All of them"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CJugaba\u201D best translates as...", choices:["I played (one time)","I used to play","I will play","I am playing"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Imperfect is generally used for...", choices:["one-time finished events","ongoing/habitual past actions","future plans","commands"], a:1, cat:"Gram\u00E1tica"},
+        {q:"The imperfect of \u201Cver\u201D (yo) is...", choices:["v\u00ED","ve\u00EDa","viera","veo"], a:1, cat:"Gram\u00E1tica"},
+        {q:"In \u201CLlov\u00EDa cuando sal\u00ED,\u201D which verb is the background?", choices:["llov\u00EDa","sal\u00ED","both equally","neither"], a:0, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CHab\u00EDa muchos ni\u00F1os\u201D is correct because hab\u00EDa...", choices:["agrees with ni\u00F1os (plural)","always stays singular","is preterite","is a command"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CExtra\u00F1ar\u201D means...", choices:["to study","to forget","to miss (something/someone)","to remember"], a:2, cat:"Vocabulario"},
+        {q:"\u201CMientras\u201D is closest to...", choices:["before","after","while","never"], a:2, cat:"Vocabulario"},
+        {q:"\u201CDe peque\u00F1o\u201D means...", choices:["small in size","when little/as a child","never","quickly"], a:1, cat:"Vocabulario"},
+        {q:"The Cop\u00E1n ruins, a UNESCO site with a famous hieroglyphic stairway, are located in...", choices:["Per\u00FA","Guatemala","Honduras","Chile"], a:2, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Honduras",
+        facts:{capital:"Tegucigalpa", population:"\u224810.4 millones", language:"Espa\u00F1ol", extra:"Parte de la Barrera Mesoamericana, 2.\u00AA arrecife m\u00E1s grande del mundo"},
+        note:"The Maya ruins at Cop\u00E1n in western Honduras are home to the longest known hieroglyphic inscription in the Americas \u2014 a stairway covered in carved text that archaeologists are still working to fully translate, recording centuries of royal history. Honduras is also home to part of the Mesoamerican Barrier Reef, the second-largest coral reef system in the world after Australia's Great Barrier Reef, stretching along the coast near islands like Roat\u00E1n, a popular diving destination. Honduran culture blends Indigenous Lenca heritage, Spanish colonial influence, and Garifuna Afro-Caribbean traditions along the coast, especially visible in music and food."
+      }
+    },
+    {
+      id:"l2-4", title:"De Viaje: Transporte y Direcciones", en:"Travel: Transportation & Directions",
+      teksFocus:"Interpersonal Communication", country:"Ecuador",
+      vocab:[
+        {es:"el avi\u00F3n", en:"airplane", pron:"el ah-VYOHN"},
+        {es:"el aeropuerto", en:"airport", pron:"el ah-eh-roh-PWEHR-toh"},
+        {es:"la maleta", en:"suitcase", pron:"lah mah-LEH-tah"},
+        {es:"el autob\u00FAs / el tren", en:"bus / train", pron:"el ow-toh-BOOS"},
+        {es:"el taxi", en:"taxi", pron:"el TAHK-see"},
+        {es:"a la derecha", en:"to the right", pron:"ah lah deh-REH-chah"},
+        {es:"a la izquierda", en:"to the left", pron:"ah lah ees-KYEHR-dah"},
+        {es:"derecho", en:"straight ahead", pron:"deh-REH-choh"},
+        {es:"cerca de / lejos de", en:"near / far from", pron:"SEHR-kah deh"},
+        {es:"entre / al lado de", en:"between / next to", pron:"EHN-treh"},
+        {es:"el boleto / el pasaporte", en:"ticket / passport", pron:"el boh-LEH-toh"},
+        {es:"el mapa", en:"map", pron:"el MAH-pah"},
+        {es:"la frontera", en:"border", pron:"lah frohn-TEH-rah"},
+        {es:"el equipaje", en:"luggage", pron:"el eh-kee-PAH-heh"},
+        {es:"perdido / perdida", en:"lost", pron:"pehr-DEE-doh"},
+        {es:"la cuadra", en:"city block", pron:"lah KWAH-drah"}
+      ],
+      phrases:[
+        {es:"Estoy perdido/a, \u00BFme puede ayudar?", en:"I'm lost, can you help me?"},
+        {es:"\u00BFA qu\u00E9 hora sale el vuelo?", en:"What time does the flight leave?"},
+        {es:"\u00BFCu\u00E1ntas cuadras son?", en:"How many blocks is it?"},
+        {es:"Tome la primera calle a la derecha.", en:"Take the first street on the right."},
+        {es:"\u00BFDónde queda la parada del autob\u00FAs?", en:"Where is the bus stop located?"},
+        {es:"Necesito facturar mi equipaje.", en:"I need to check my luggage."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Prepositions of Place & Asking for Directions",
+            body:"Giving and following directions leans on a small toolkit of prepositions: cerca de (near), lejos de (far from), al lado de (next to), entre (between), enfrente de (in front of), detr\u00E1s de (behind). Combine these with the verb estar to say where something is (El aeropuerto est\u00E1 lejos del centro), and use seguir derecho, doblar a la derecha/izquierda (continue straight, turn right/left) to give step-by-step directions. Notice a + el always contracts to al, and de + el contracts to del \u2014 you'll never see \u201Ca el\u201D or \u201Cde el\u201D written out.",
+            table:null,
+            examples:[
+              {es:"El hotel est\u00E1 al lado del mercado.", en:"The hotel is next to the market."},
+              {es:"Siga derecho y doble a la izquierda.", en:"Continue straight and turn left."},
+              {es:"\u00BFD\u00F3nde est\u00E1 la parada de autob\u00FAs? Est\u00E1 entre el banco y la farmacia.", en:"Where's the bus stop? It's between the bank and the pharmacy."},
+              {es:"La estaci\u00F3n de tren est\u00E1 detr\u00E1s del parque.", en:"The train station is behind the park."}
+            ]
+          },
+          {
+            title:"Formal (Usted) Commands",
+            body:"When giving directions to a stranger, you'll naturally use usted commands \u2014 the polite imperative. To form them for regular verbs: take the yo form of the present tense, drop the -o, and add the \u201Copposite vowel\u201D ending: -ar verbs get -e (tomar \u2192 tome), -er/-ir verbs get -a (seguir \u2192 siga, using its irregular yo form sigo as the base). A handful of high-frequency verbs are irregular: ir \u2192 vaya, ser \u2192 sea, dar \u2192 d\u00E9, estar \u2192 est\u00E9, saber \u2192 sepa.",
+            table:{headers:["Infinitive","Usted command","Meaning"], rows:[
+              ["tomar","tome","take"],
+              ["doblar","doble","turn"],
+              ["seguir","siga","continue/follow"],
+              ["cruzar","cruce","cross"],
+              ["ir","vaya","go (irregular)"]
+            ]},
+            examples:[
+              {es:"Tome la calle Bol\u00EDvar hasta el final.", en:"Take Bol\u00EDvar Street to the end."},
+              {es:"Cruce la calle con cuidado.", en:"Cross the street carefully."},
+              {es:"Vaya derecho dos cuadras y doble a la derecha.", en:"Go straight two blocks and turn right."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't write \u201Ca el aeropuerto\u201D or \u201Cde el centro\u201D \u2014 those always contract to al aeropuerto and del centro; there's no exception.",
+          "Formal commands swap the expected vowel: -ar verbs take an -e ending (not -a) and -er/-ir verbs take an -a ending (not -e) \u2014 it's the reverse of what the infinitive ending might suggest."
+        ]
+      },
+      quiz:[
+        {q:"\u201CA la izquierda\u201D means...", choices:["straight ahead","to the right","to the left","next to"], a:2, cat:"Vocabulario"},
+        {q:"\u201Ca + el\u201D always contracts to...", choices:["al","a'l","ael","a el"], a:0, cat:"Gram\u00E1tica"},
+        {q:"Which word means \u201Cbetween\u201D?", choices:["cerca de","entre","lejos de","derecho"], a:1, cat:"Vocabulario"},
+        {q:"\u201CLa maleta\u201D is...", choices:["the ticket","the map","the suitcase","the airport"], a:2, cat:"Vocabulario"},
+        {q:"Usted command for \u201Ctomar\u201D?", choices:["toma","tome","tomar","tomas"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Usted command for \u201Cir\u201D (irregular)?", choices:["va","ido","vaya","ir\u00E1"], a:2, cat:"Gram\u00E1tica"},
+        {q:"-ar verbs in usted commands take which ending?", choices:["-a","-e","-o","-as"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CDel centro\u201D is a contraction of...", choices:["de + el centro","de + la centro","del + centro","da + el centro"], a:0, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CPerdido/a\u201D means...", choices:["found","lost","late","early"], a:1, cat:"Vocabulario"},
+        {q:"Ecuador is named for...", choices:["its founder","the equator, which runs through it","its main river","a Spanish city"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Ecuador",
+        facts:{capital:"Quito", population:"\u224818 millones", language:"Espa\u00F1ol, quechua", extra:"Usa el d\u00F3lar estadounidense como moneda oficial"},
+        note:"Ecuador is named for la l\u00EDnea ecuatorial \u2014 the equator \u2014 which runs directly through the country, including a monument just outside Quito where visitors can stand with one foot in each hemisphere. Despite its relatively small size, Ecuador packs in towering Andes peaks over 20,000 feet, Amazon rainforest, and the Gal\u00E1pagos Islands \u2014 famous for the unique wildlife that helped inspire Charles Darwin's theory of evolution \u2014 all within roughly the area of Colorado. Unusually for the region, Ecuador uses the U.S. dollar as its official currency, a change made in 2000 after a major economic crisis, which means prices there are already in dollars and cents rather than a separate currency."
+      }
+    },
+    {
+      id:"l2-5", title:"De Compras: Ropa y Regateo", en:"Shopping: Clothes & Bargaining",
+      teksFocus:"Interpersonal Communication", country:"Paraguay",
+      vocab:[
+        {es:"el mercado", en:"market", pron:"el mehr-KAH-doh"},
+        {es:"la tienda / el centro comercial", en:"store / mall", pron:"lah TYEHN-dah"},
+        {es:"el precio", en:"price", pron:"el PREH-syoh"},
+        {es:"\u00BFCu\u00E1nto cuesta?", en:"How much does it cost?", pron:"KWAHN-toh KWEHS-tah"},
+        {es:"caro / barato", en:"expensive / cheap", pron:"KAH-roh / bah-RAH-toh"},
+        {es:"cien, doscientos, mil", en:"one hundred, two hundred, one thousand", pron:"syehn, dohs-SYEHN-tohs, meel"},
+        {es:"probarse", en:"to try on", pron:"proh-BAR-seh"},
+        {es:"lo quiero / la quiero", en:"I want it", pron:"loh KYEH-roh"},
+        {es:"hecho a mano", en:"handmade", pron:"EH-choh ah MAH-noh"},
+        {es:"el descuento / la oferta", en:"discount / sale", pron:"el dehs-KWEHN-toh"},
+        {es:"el efectivo / la tarjeta", en:"cash / card", pron:"el eh-fehk-TEE-voh"},
+        {es:"el vendedor / la vendedora", en:"salesperson", pron:"el vehn-deh-DOR"},
+        {es:"el algod\u00F3n / la lana", en:"cotton / wool", pron:"el al-goh-DOHN"},
+        {es:"el tama\u00F1o / la talla", en:"size", pron:"el tah-MAH-nyoh"},
+        {es:"regatear", en:"to bargain, haggle", pron:"reh-gah-teh-AR"},
+        {es:"el cambio", en:"change (money)", pron:"el KAHM-byoh"}
+      ],
+      phrases:[
+        {es:"\u00BFMe puede hacer un descuento?", en:"Can you give me a discount?"},
+        {es:"Es mi \u00FAltimo precio.", en:"That's my final price."},
+        {es:"\u00BFEn qu\u00E9 le puedo ayudar?", en:"How can I help you? (clerk)"},
+        {es:"Solo estoy mirando, gracias.", en:"I'm just looking, thanks."},
+        {es:"\u00BFAceptan tarjeta?", en:"Do you accept card?"},
+        {es:"Me lo llevo.", en:"I'll take it."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Direct Object Pronouns & Numbers 100+",
+            body:"Once an item's already been named, swap it for a direct object pronoun so you don't repeat yourself: lo (it/him, masc.), la (it/her, fem.), los/las (them). They go right before the conjugated verb: \u00BFLa camisa? La quiero. (\u201CThe shirt? I want it.\u201D) For numbers above 100, cien becomes ciento before another number (ciento veinte = 120) but stays cien before mil or a noun (cien d\u00F3lares). Hundreds like 200\u2013900 agree in gender with what they're counting: doscientos pesos, but doscientas personas.",
+            table:{headers:["Singular obj.","Plural obj.","Number","Spanish"], rows:[
+              ["lo (masc.)","los (masc.)","100","cien"],
+              ["la (fem.)","las (fem.)","120","ciento veinte"],
+              ["","","200","doscientos/as"],
+              ["","","1,000","mil"]
+            ]},
+            examples:[
+              {es:"\u00BFCu\u00E1nto cuesta esa blusa? Cuesta ciento cincuenta guaran\u00EDes.", en:"How much does that blouse cost? It costs one hundred fifty guaran\u00EDes."},
+              {es:"Me gusta esta falda. \u00BFPuedo prob\u00E1rmela?", en:"I like this skirt. Can I try it on?"},
+              {es:"Los aretes son hermosos. Los quiero.", en:"The earrings are beautiful. I want them."}
+            ]
+          },
+          {
+            title:"Indirect Object Pronouns",
+            body:"While direct object pronouns answer \u201Cwhat/who receives the action,\u201D indirect object pronouns answer \u201Cto/for whom.\u201D They look almost identical to direct objects except in the third person: me, te, le (not lo/la!), nos, les. Le and les are notoriously ambiguous on their own (le compro un regalo could mean \u201Cfor him,\u201D \u201Cfor her,\u201D or \u201Cfor you, formal\u201D), so Spanish often clarifies with a + person, even though it can feel redundant to an English speaker's ear.",
+            table:{headers:["Person","Indirect obj.","Direct obj."], rows:[
+              ["me/you","me / te","me / te"],
+              ["him/her/you (formal)","le","lo / la"],
+              ["us","nos","nos"],
+              ["them/you all","les","los / las"]
+            ]},
+            examples:[
+              {es:"Le compro un regalo a mi madre.", en:"I'm buying a gift for my mother."},
+              {es:"\u00BFTe puedo mostrar algo m\u00E1s?", en:"Can I show you something else?"},
+              {es:"Les doy el cambio a los clientes.", en:"I give the change to the customers."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't confuse le (indirect, \u201Cto/for him-her\u201D) with lo (direct, \u201Chim/it\u201D) \u2014 they look similar but answer different questions about the sentence.",
+          "100 exactly is cien, but 101\u2013199 needs ciento (ciento uno, not \u201Ccien uno\u201D) \u2014 the shortened form only applies to the round number itself."
+        ]
+      },
+      quiz:[
+        {q:"\u201C\u00BFLa camisa? ___ quiero.\u201D \u2014 fill in the pronoun.", choices:["Lo","La","Las","Le"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CHecho a mano\u201D means...", choices:["on sale","handmade","imported","expensive"], a:1, cat:"Vocabulario"},
+        {q:"120 in Spanish is...", choices:["cien veinte","ciento veinte","cien y veinte","veinte cien"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201C\u00BFCu\u00E1nto cuesta?\u201D asks about...", choices:["the size","the color","the price","the location"], a:2, cat:"Vocabulario"},
+        {q:"\u201CLe compro un regalo\u201D \u2014 le is what type of pronoun?", choices:["direct object","indirect object","subject","reflexive"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Indirect object pronoun for \u201Cthem/you all\u201D?", choices:["los","las","les","le"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201C101\u201D is correctly written as...", choices:["cien uno","ciento uno","cien y uno","ciento y uno"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CRegatear\u201D means...", choices:["to pay full price","to bargain/haggle","to return an item","to try on clothes"], a:1, cat:"Vocabulario"},
+        {q:"\u201CDoscientas personas\u201D \u2014 doscientas agrees because personas is...", choices:["masculine","feminine","plural only, gender doesn't matter","singular"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"Which language is co-official with Spanish in Paraguay, spoken by most of the population?", choices:["Quechua","Guaran\u00ED","N\u00E1huatl","Maya"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Paraguay",
+        facts:{capital:"Asunci\u00F3n", population:"\u22487.5 millones", language:"Espa\u00F1ol y guaran\u00ED (ambos oficiales)", extra:"Mayor\u00EDa de la poblaci\u00F3n habla guaran\u00ED"},
+        note:"Guaran\u00ED is co-official with Spanish in Paraguay and is spoken by the large majority of the population, including many people without Indigenous ancestry \u2014 a genuinely bilingual national identity that's unusual in the region, where Indigenous languages are more often minority languages. Many Paraguayans code-switch fluidly between Spanish and Guaran\u00ED in the same conversation, and a mixed form called Jopara is common in everyday speech. In local markets, look for \u00F1and\u00FAt\u00ED, a delicate \u201Cspider-web\u201D lace handmade by embroiderers stitching thread over a woven net base \u2014 a craft tradition passed down through generations and a popular item for visitors hoping to bring home something hecho a mano."
+      }
+    },
+    {
+      id:"l2-6", title:"La Salud y el Cuerpo", en:"Health & the Body",
+      teksFocus:"Interpretive Communication", country:"Uruguay",
+      vocab:[
+        {es:"la cabeza", en:"head", pron:"lah kah-BEH-sah"},
+        {es:"el est\u00F3mago", en:"stomach", pron:"el ehs-TOH-mah-goh"},
+        {es:"la garganta", en:"throat", pron:"lah gar-GAHN-tah"},
+        {es:"los o\u00EDdos", en:"ears (inner)", pron:"lohs oh-EE-dohs"},
+        {es:"Me duele(n)...", en:"My ... hurts/hurt", pron:"meh DWEH-leh(n)"},
+        {es:"la fiebre", en:"fever", pron:"lah FYEH-breh"},
+        {es:"la tos / el resfriado", en:"cough / cold (illness)", pron:"lah tohs"},
+        {es:"el m\u00E9dico / la m\u00E9dica", en:"doctor", pron:"el MEH-dee-koh"},
+        {es:"la farmacia", en:"pharmacy", pron:"lah far-MAH-syah"},
+        {es:"la pastilla / la receta", en:"pill / prescription", pron:"lah pahs-TEE-yah"},
+        {es:"sentirse bien / mal", en:"to feel good / bad", pron:"sehn-TEER-seh"},
+        {es:"el dolor", en:"pain", pron:"el doh-LOR"},
+        {es:"la alergia", en:"allergy", pron:"lah ah-LEHR-hyah"},
+        {es:"descansar", en:"to rest", pron:"dehs-kahn-SAR"},
+        {es:"la cita", en:"appointment", pron:"lah SEE-tah"},
+        {es:"sano / sana", en:"healthy", pron:"SAH-noh"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 te pasa?", en:"What's wrong? / What's the matter?"},
+        {es:"No me siento bien.", en:"I don't feel well."},
+        {es:"Necesito una cita con el m\u00E9dico.", en:"I need an appointment with the doctor."},
+        {es:"\u00A1Que te mejores!", en:"Get well soon!"},
+        {es:"Tengo que tomar esta pastilla cada ocho horas.", en:"I have to take this pill every eight hours."},
+        {es:"\u00BFEs grave?", en:"Is it serious?"}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Doler (to hurt) & Sentirse (to feel)",
+            body:"Doler works exactly like gustar: the body part is the grammatical subject, and the person is the indirect object. Me duele la cabeza literally means \u201CThe head is hurting to me.\u201D Use duele for one body part, duelen for more than one: Me duelen los pies (my feet hurt). Sentirse (to feel) is reflexive and stem-changing (e\u2192ie): me siento, te sientes, se siente \u2014 followed by an adjective or adverb: Me siento mal (I feel bad).",
+            table:{headers:["Pronoun","sentirse (e\u2192ie)"], rows:[
+              ["yo","me siento"],["t\u00FA","te sientes"],["usted/\u00E9l/ella","se siente"],
+              ["nosotros/as","nos sentimos"],["ustedes/ellos/as","se sienten"]
+            ]},
+            examples:[
+              {es:"Me duele el est\u00F3mago.", en:"My stomach hurts."},
+              {es:"\u00BFTe sientes bien o mal hoy?", en:"Do you feel good or bad today?"},
+              {es:"Tiene fiebre, as\u00ED que necesita ir al m\u00E9dico.", en:"He has a fever, so he needs to go to the doctor."},
+              {es:"Nos sentimos mucho mejor despu\u00E9s de descansar.", en:"We feel much better after resting."}
+            ]
+          },
+          {
+            title:"Present Perfect Tense (he/has/ha + Participio)",
+            body:"To talk about what HAS happened \u2014 a past action connected to the present, like an illness that's been going on \u2014 use the present tense of haber (he, has, ha, hemos, han) plus a past participle. Regular participles are easy: drop -ar and add -ado (estado), or drop -er/-ir and add -ido (tenido, sentido). A handful of irregular participles are extremely common and worth memorizing: hecho (hacer), visto (ver), dicho (decir), puesto (poner), escrito (escribir).",
+            table:{headers:["Infinitive","Participio","he + participio"], rows:[
+              ["estar","estado","he estado"],
+              ["tener","tenido","he tenido"],
+              ["hacer (irregular)","hecho","he hecho"],
+              ["ver (irregular)","visto","he visto"]
+            ]},
+            examples:[
+              {es:"He estado enfermo toda la semana.", en:"I have been sick all week."},
+              {es:"\u00BFHas tomado la medicina?", en:"Have you taken the medicine?"},
+              {es:"El m\u00E9dico ya ha visto los resultados.", en:"The doctor has already seen the results."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Don't conjugate doler to match the person \u2014 like gustar, it agrees with the body part: me duelen los pies, never \u201Cme duelo los pies.\u201D",
+          "Irregular past participles (hecho, visto, dicho, puesto, escrito) don't follow the -ado/-ido pattern \u2014 trying to regularize them (\u201Chacido\u201D, \u201Cvido\u201D) is a common but noticeable mistake."
+        ]
+      },
+      quiz:[
+        {q:"\u201CMe duele la cabeza\u201D means...", choices:["I like my head","My head hurts","I have a headache pill","My head is fine"], a:1, cat:"Vocabulario"},
+        {q:"For more than one body part, use...", choices:["duele","duelen","duelo","duelas"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CLa farmacia\u201D is where you get...", choices:["food","medicine","clothes","tickets"], a:1, cat:"Vocabulario"},
+        {q:"\u201CMe siento\u201D comes from which verb?", choices:["sentar (to sit)","sentir/sentirse (to feel)","ser (to be)","saber (to know)"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CHe estado\u201D uses which auxiliary verb?", choices:["ser","estar","haber","tener"], a:2, cat:"Gram\u00E1tica"},
+        {q:"Irregular participle of \u201Chacer\u201D?", choices:["hacido","hecho","hac\u00EDo","hac\u00ADado"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CHas tomado la medicina?\u201D means...", choices:["Did you take the medicine?","Will you take the medicine?","Have you taken the medicine?","Were you taking the medicine?"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CDescansar\u201D means...", choices:["to exercise","to rest","to run","to cook"], a:1, cat:"Vocabulario"},
+        {q:"\u201CSano\u201D means...", choices:["sick","tired","healthy","old"], a:2, cat:"Vocabulario"},
+        {q:"Sharing mate from a single gourd among friends is a daily social ritual especially in...", choices:["Espa\u00F1a","Cuba","Uruguay","Guatemala"], a:2, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Uruguay",
+        facts:{capital:"Montevideo", population:"\u22483.4 millones", language:"Espa\u00F1ol", extra:"Uno de los pa\u00EDses m\u00E1s estables de la regi\u00F3n"},
+        note:"In Uruguay, drinking mate isn't just a beverage \u2014 it's a shared, social ritual where one gourd and metal straw (bombilla) gets refilled and passed friend to friend, often while walking down the street with a thermos tucked under one arm; per-capita, Uruguayans are among the world's heaviest mate drinkers. Uruguay is also frequently cited as having one of the more developed social welfare and healthcare systems in Latin America, alongside high literacy rates and political stability. It's a small country by population, but it punches above its weight internationally: Uruguay's national soccer team won the very first World Cup in 1930, hosted on home soil in Montevideo."
+      }
+    },
+    {
+      id:"l2-7", title:"El Futuro: Planes y Profesiones", en:"The Future: Plans & Careers",
+      teksFocus:"Presentational Communication", country:"Puerto Rico",
+      vocab:[
+        {es:"el abogado / la abogada", en:"lawyer", pron:"el ah-boh-GAH-doh"},
+        {es:"el ingeniero / la ingeniera", en:"engineer", pron:"el een-heh-NYEH-roh"},
+        {es:"el m\u00FAsico / la m\u00FAsica", en:"musician", pron:"el MOO-see-koh"},
+        {es:"el programador / la programadora", en:"programmer", pron:"el proh-grah-mah-DOR"},
+        {es:"ir a + infinitivo", en:"to be going to (do something)", pron:"eer ah"},
+        {es:"el sue\u00F1o", en:"dream", pron:"el SWEH-nyoh"},
+        {es:"alg\u00FAn d\u00EDa", en:"someday", pron:"al-GOON DEE-ah"},
+        {es:"trabajar", en:"to work", pron:"trah-bah-HAR"},
+        {es:"ganar dinero", en:"to earn money", pron:"gah-NAR dee-NEH-roh"},
+        {es:"la carrera", en:"career", pron:"lah kah-REH-rah"},
+        {es:"la universidad", en:"university", pron:"lah oo-nee-vehr-see-DAHD"},
+        {es:"graduarse", en:"to graduate", pron:"grah-dwAR-seh"},
+        {es:"la meta", en:"goal", pron:"lah MEH-tah"},
+        {es:"tener \u00E9xito", en:"to be successful", pron:"teh-NEHR EHK-see-toh"},
+        {es:"el futuro", en:"future", pron:"el foo-TOO-roh"},
+        {es:"esforzarse", en:"to make an effort, work hard", pron:"ehs-for-SAR-seh"}
+      ],
+      phrases:[
+        {es:"\u00BFQu\u00E9 quieres ser de mayor?", en:"What do you want to be when you grow up?"},
+        {es:"Voy a seguir mis sue\u00F1os.", en:"I'm going to follow my dreams."},
+        {es:"Espero tener \u00E9xito en mi carrera.", en:"I hope to be successful in my career."},
+        {es:"Todav\u00EDa no s\u00E9 qu\u00E9 quiero estudiar.", en:"I still don't know what I want to study."},
+        {es:"Me esfuerzo mucho en la escuela.", en:"I work hard at school."},
+        {es:"\u00A1El cielo es el l\u00EDmite!", en:"The sky's the limit!"}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Ir + a + Infinitive (Near Future)",
+            body:"The easiest way to talk about the future in Spanish doesn't require a new verb ending at all: conjugate ir (voy, vas, va, vamos, van) and add a + an infinitive. Voy a estudiar medicina describes a plan, the way English uses \u201CI'm going to...\u201D To talk about wishes or distant dreams rather than concrete plans, querer + infinitive (to want to) or the phrase me gustar\u00EDa (I would like to) both work well too.",
+            table:null,
+            examples:[
+              {es:"Voy a ser ingeniera alg\u00FAn d\u00EDa.", en:"I'm going to be an engineer someday."},
+              {es:"\u00BFQu\u00E9 vas a hacer despu\u00E9s de graduarte?", en:"What are you going to do after you graduate?"},
+              {es:"Me gustar\u00EDa trabajar en m\u00FAsica.", en:"I would like to work in music."}
+            ]
+          },
+          {
+            title:"True Future Tense (-\u00E9, -\u00E1s, -\u00E1, -emos, -\u00E1n)",
+            body:"Spanish I has a SECOND way to talk about the future that doesn't exist as directly in casual English: a single-word future tense formed by adding endings straight onto the FULL infinitive (not a stem) for regular verbs: trabajar\u00E9, trabajar\u00E1s, trabajar\u00E1... This tense often carries a slightly more formal or certain tone than ir + a, similar to the difference between \u201CI will\u201D and \u201CI'm going to\u201D in English. A set of common, high-frequency verbs shorten their stem before adding the same endings: tener \u2192 tendr-, hacer \u2192 har-, poder \u2192 podr-, decir \u2192 dir-, saber \u2192 sabr-, salir \u2192 saldr-.",
+            table:{headers:["Pronoun","Regular (trabajar)","Irregular stem example (tener)"], rows:[
+              ["yo","trabajar\u00E9","tendr\u00E9"],
+              ["t\u00FA","trabajar\u00E1s","tendr\u00E1s"],
+              ["usted/\u00E9l/ella","trabajar\u00E1","tendr\u00E1"],
+              ["nosotros/as","trabajaremos","tendremos"],
+              ["ustedes/ellos/as","trabajar\u00E1n","tendr\u00E1n"]
+            ]},
+            examples:[
+              {es:"Algún d\u00EDa ser\u00E9 abogada.", en:"Someday I will be a lawyer."},
+              {es:"Tendr\u00E9 mi propio negocio.", en:"I will have my own business."},
+              {es:"\u00BFQu\u00E9 har\u00E1s despu\u00E9s de la universidad?", en:"What will you do after college?"}
+            ]
+          }
+        ],
+        mistakes:[
+          "Future tense endings attach to the full infinitive, not a shortened stem \u2014 it's hablar\u00E9, not \u201Chablr\u00E9\u201D \u2014 except for the small set of verbs with irregular shortened stems like tendr-, har-, dir-.",
+          "Don't mix up ir + a + infinitive (plan, near-term) with the synthetic future (-\u00E9/-\u00E1s...) \u2014 both are grammatically correct for the future, but native speakers lean toward ir + a for everyday plans and the synthetic future for more formal predictions or promises."
+        ]
+      },
+      quiz:[
+        {q:"\u201CVoy a estudiar\u201D means...", choices:["I studied","I am going to study","I want to study","I studied yesterday"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CEl sue\u00F1o\u201D means...", choices:["the job","the dream","the money","the school"], a:1, cat:"Vocabulario"},
+        {q:"Correct structure for near future:", choices:["ir + infinitivo","ir + a + infinitivo","a + ir + infinitivo","infinitivo + ir"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CGanar dinero\u201D means...", choices:["to spend money","to save money","to earn money","to lose money"], a:2, cat:"Vocabulario"},
+        {q:"\u201CYo\u201D future tense ending (regular)?", choices:["-o","-\u00E9","-as","-\u00E1"], a:1, cat:"Gram\u00E1tica"},
+        {q:"Future stem of \u201Ctener\u201D?", choices:["tener-","tendr-","tien-","ten-"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CSer\u00E9 abogada\u201D means...", choices:["I was a lawyer","I am a lawyer","I will be a lawyer","I would be a lawyer"], a:2, cat:"Aplicaci\u00F3n"},
+        {q:"Future tense endings attach to...", choices:["a shortened stem always","the full infinitive (usually)","the gerund","the participle"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CEsforzarse\u201D means...", choices:["to relax","to work hard / make an effort","to give up","to travel"], a:1, cat:"Vocabulario"},
+        {q:"Puerto Rico has produced an unusually high number of professional...", choices:["astronauts","baseball players and global music artists","Olympic skiers","airline pilots"], a:1, cat:"Cultura"}
+      ],
+      culture:{
+        country:"Puerto Rico",
+        facts:{capital:"San Juan", population:"\u22483.2 millones", language:"Espa\u00F1ol e ingl\u00E9s (ambos oficiales)", extra:"El Yunque, \u00FAnico bosque tropical del sistema forestal de EE.UU."},
+        note:"For its size, Puerto Rico has sent a remarkable number of players to Major League Baseball \u2014 legends like Roberto Clemente helped open doors that generations of Puerto Rican players have followed. It's also been a launching pad for globally influential music: reggaet\u00F3n, born from a blend of Puerto Rican and Panamanian sounds in the 1990s, became one of the most-streamed genres in the world by the 2020s, turning artists from the island into global stars. Both music and sports are real, visible career paths many young Puerto Ricans grow up dreaming about and actively work toward. El Yunque, in the island's northeast, is the only tropical rainforest in the entire U.S. National Forest System."
+      }
+    },
+    {
+      id:"l2-8", title:"Comparaciones Culturales", en:"Cultural Comparisons",
+      teksFocus:"Presentational & Interpretive Communication \u00B7 Comparisons", country:"Guinea Ecuatorial",
+      vocab:[
+        {es:"m\u00E1s ... que", en:"more ... than", pron:"mahs keh"},
+        {es:"menos ... que", en:"less ... than", pron:"MEH-nohs keh"},
+        {es:"tan ... como", en:"as ... as", pron:"tahn KOH-moh"},
+        {es:"el/la m\u00E1s...", en:"the most...", pron:"el mahs"},
+        {es:"el/la menos...", en:"the least...", pron:"el MEH-nohs"},
+        {es:"mejor / peor", en:"better / worse", pron:"meh-HOR / peh-OR"},
+        {es:"mayor / menor", en:"older / younger", pron:"mah-YOR / meh-NOR"},
+        {es:"grande / peque\u00F1o", en:"big / small", pron:"GRAHN-deh / peh-KEH-nyoh"},
+        {es:"lejano / lejana", en:"distant, far-off", pron:"leh-HAH-noh"},
+        {es:"el continente", en:"continent", pron:"el kohn-tee-NEHN-teh"},
+        {es:"la diversidad", en:"diversity", pron:"lah dee-vehr-see-DAHD"},
+        {es:"semejante / parecido", en:"similar", pron:"seh-meh-HAHN-teh"},
+        {es:"distinto / diferente", en:"different", pron:"dees-TEEN-toh"},
+        {es:"compartir", en:"to share", pron:"kohm-par-TEER"},
+        {es:"el rasgo", en:"trait, characteristic", pron:"el RAHS-goh"},
+        {es:"\u00FAnico / \u00FAnica", en:"unique, only", pron:"OO-nee-koh"}
+      ],
+      phrases:[
+        {es:"\u00BFEn qu\u00E9 se parecen estos pa\u00EDses?", en:"How are these countries similar?"},
+        {es:"Cada pa\u00EDs tiene su propia identidad.", en:"Each country has its own identity."},
+        {es:"Lo que m\u00E1s me sorprendi\u00F3 fue...", en:"What surprised me most was..."},
+        {es:"Comparado con Texas,...", en:"Compared to Texas,..."},
+        {es:"Tienen m\u00E1s en com\u00FAn de lo que pensaba.", en:"They have more in common than I thought."},
+        {es:"El espa\u00F1ol cambia de pa\u00EDs a pa\u00EDs.", en:"Spanish changes from country to country."}
+      ],
+      grammar:{
+        points:[
+          {
+            title:"Comparatives & Superlatives",
+            body:"To compare two things, sandwich an adjective between m\u00E1s/menos and que: M\u00E9xico es m\u00E1s grande que Guatemala. For equal comparisons, use tan + adjective + como: Chile es tan largo como interesante. Superlatives single out the extreme of a group with el/la m\u00E1s + adjective + de: Es el pa\u00EDs m\u00E1s lejano de habla hispana (\u201CIt's the most distant Spanish-speaking country\u201D). A few adjectives have irregular comparative forms that don't use m\u00E1s at all: bueno \u2192 mejor (not \u201Cm\u00E1s bueno\u201D), malo \u2192 peor, viejo \u2192 mayor (for age), joven \u2192 menor.",
+            table:{headers:["Pattern","Spanish","English"], rows:[
+              ["more than","m\u00E1s ... que","bigger than"],
+              ["less than","menos ... que","smaller than"],
+              ["as ... as","tan ... como","as big as"],
+              ["the most","el/la m\u00E1s ... de","the biggest in/of"],
+              ["irregular: good","mejor (not m\u00E1s bueno)","better"]
+            ]},
+            examples:[
+              {es:"Argentina es m\u00E1s grande que Espa\u00F1a.", en:"Argentina is bigger than Spain."},
+              {es:"Para m\u00ED, el ceviche es mejor que la pizza.", en:"To me, ceviche is better than pizza."},
+              {es:"Guinea Ecuatorial es el pa\u00EDs hispanohablante m\u00E1s lejano de Texas.", en:"Equatorial Guinea is the Spanish-speaking country farthest from Texas."}
+            ]
+          },
+          {
+            title:"Superlativo Absoluto (-\u00EDsimo)",
+            body:"Beyond comparing things to each other, Spanish has a way to say something is extremely [adjective] without comparing it to anything at all: drop the final vowel and add -\u00EDsimo/a/os/as. Grande becomes grand\u00EDsimo (\u201Cextremely big\u201D), rico becomes riqu\u00EDsimo (note the spelling change c\u2192qu to keep the hard \u201Ck\u201D sound). This form is common in spoken Spanish for emphasis, similar to adding \u201Csuper-\u201D or \u201Creally, really\u201D in English, but built directly into the adjective itself.",
+            table:{headers:["Adjective","Superlativo absoluto","Spelling note"], rows:[
+              ["grande","grand\u00EDsimo","drop -e, add -\u00EDsimo"],
+              ["rico","riqu\u00EDsimo","c \u2192 qu"],
+              ["largo","largu\u00EDsimo","g \u2192 gu"],
+              ["f\u00E1cil","facil\u00EDsimo","add -\u00EDsimo directly"]
+            ]},
+            examples:[
+              {es:"Este plato est\u00E1 riqu\u00EDsimo.", en:"This dish is extremely delicious."},
+              {es:"Guinea Ecuatorial est\u00E1 lejos\u00EDsimos... \u00A1es lejan\u00EDsimo!", en:"Equatorial Guinea is extremely far away!"},
+              {es:"El examen final fue facil\u00EDsimo.", en:"The final exam was extremely easy."}
+            ]
+          }
+        ],
+        mistakes:[
+          "Never say \u201Cm\u00E1s bueno\u201D or \u201Cm\u00E1s malo\u201D to mean \u201Cbetter/worse\u201D \u2014 those concepts have their own irregular words, mejor and peor, that replace the m\u00E1s construction entirely.",
+          "Watch spelling changes before -\u00EDsimo: words ending in -co change to -qu\u00EDsimo and words ending in -go change to -gu\u00EDsimo, to preserve the original hard consonant sound."
+        ]
+      },
+      quiz:[
+        {q:"\u201CM\u00E9xico es ___ grande ___ Guatemala.\u201D", choices:["tan / como","m\u00E1s / que","el / m\u00E1s","menos / como"], a:1, cat:"Gram\u00E1tica"},
+        {q:"The irregular comparative of \u201Cbueno\u201D is...", choices:["m\u00E1s bueno","buenor","mejor","el bueno"], a:2, cat:"Gram\u00E1tica"},
+        {q:"\u201CTan grande como\u201D means...", choices:["bigger than","as big as","the biggest","less big than"], a:1, cat:"Vocabulario"},
+        {q:"Spanish is an official language on how many continents?", choices:["1","2","3","5"], a:2, cat:"Cultura"},
+        {q:"Equatorial Guinea is the only country in which continent with Spanish as an official language?", choices:["Asia","Africa","Oceania","North America"], a:1, cat:"Cultura"},
+        {q:"\u201CRiqu\u00EDsimo\u201D comes from which adjective?", choices:["rico","rica","riqueza","raro"], a:0, cat:"Gram\u00E1tica"},
+        {q:"-\u00EDsimo words ending in -co change the spelling to...", choices:["-c\u00EDsimo","-qu\u00EDsimo","-quisimo","stays -co"], a:1, cat:"Gram\u00E1tica"},
+        {q:"\u201CMayor,\u201D when comparing people, usually means...", choices:["bigger in size","older","better","more important"], a:1, cat:"Aplicaci\u00F3n"},
+        {q:"\u201CDiversidad\u201D means...", choices:["distance","diversity","difficulty","division"], a:1, cat:"Vocabulario"},
+        {q:"This course's 16 units visited how many different countries?", choices:["8","12","16","20"], a:2, cat:"Aplicaci\u00F3n"}
+      ],
+      culture:{
+        country:"Guinea Ecuatorial",
+        facts:{capital:"Malabo", population:"\u22481.7 millones", language:"Espa\u00F1ol, franc\u00E9s, portugu\u00E9s (oficiales) + lenguas locales", extra:"\u00DAnico pa\u00EDs africano con el espa\u00F1ol como idioma oficial"},
+        note:"Spanish isn't only spoken in Europe and the Americas: Equatorial Guinea, on Africa's west coast, has been Spanish-speaking since gaining independence from Spain in 1968, making it the only African nation where Spanish is an official language. Its capital, Malabo, sits on the island of Bioko, while most of the country's land and population are on the mainland region called R\u00EDo Muni, separated from the capital by open ocean. Over the course of this entire program, you've now studied vocabulary, grammar, and culture connected to sixteen different Spanish-speaking places across three continents \u2014 a small but real reflection of just how far, and how differently, this one language is lived and spoken around the world."
+      }
+    }
+  ]
+}
+};
+
+/* =====================================================================
+   STATE
+   ===================================================================== */
+let state = {
+  screen:"home", level:null, unitId:null, unitTab:"vocab",
+  flash:{index:0, flipped:false},
+  quiz:{index:0, score:0, selected:null, answered:false, finished:false},
+  progress:{completed:{}, scores:{}},
+  loaded:false
+};
+
+/* =====================================================================
+   PERSISTENCE
+   ===================================================================== */
+async function loadProgress(){
+  try{
+    const result = await window.storage.get('progress', false);
+    if(result && result.value){ state.progress = JSON.parse(result.value); }
+  }catch(e){ /* no saved progress yet \u2014 defaults stand */ }
+  state.loaded = true;
+  render();
+}
+async function saveProgress(){
+  try{ await window.storage.set('progress', JSON.stringify(state.progress), false); }
+  catch(e){ console.error('Could not save progress', e); }
+}
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+function getLevel(key){ return COURSE[key]; }
+function findUnit(unitId){
+  for(const lvKey of ["level1","level2"]){
+    const u = COURSE[lvKey].units.find(x=>x.id===unitId);
+    if(u) return {unit:u, levelKey:lvKey};
+  }
+  return null;
+}
+function levelDone(levelKey){
+  return COURSE[levelKey].units.filter(u=>state.progress.completed[u.id]).length;
+}
+function totalDone(){ return levelDone("level1")+levelDone("level2"); }
+function totalUnits(){ return COURSE.level1.units.length + COURSE.level2.units.length; }
+function stampHash(id){ let h=0; for(let i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))%997; } return h; }
+function stampRotation(id){ return (stampHash(id)%22)-11; }
+function stampColor(id){ return stampHash(id)%2===0 ? "teal" : "red"; }
+function esc(s){ return String(s); }
+function speak(text){
+  try{
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "es-MX"; u.rate = 0.92;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* =====================================================================
+   NAVIGATION
+   ===================================================================== */
+function goHome(){ state.screen="home"; render(); }
+function goLevelScreen(levelKey){ state.screen="level"; state.level=levelKey; render(); }
+function goProgress(){ state.screen="progress"; render(); }
+function goUnit(levelKey, unitId){
+  state.screen="unit"; state.level=levelKey; state.unitId=unitId; state.unitTab="vocab";
+  state.flash={index:0, flipped:false};
+  state.quiz={index:0, score:0, selected:null, answered:false, finished:false};
+  render();
+}
+function setUnitTab(tab){ state.unitTab=tab; render(); }
+
+/* Flashcards */
+function flashFlip(){ state.flash.flipped = !state.flash.flipped; render(); }
+function flashNext(){
+  const {unit} = findUnit(state.unitId);
+  state.flash.index = (state.flash.index+1) % unit.vocab.length;
+  state.flash.flipped = false; render();
+}
+function flashPrev(){
+  const {unit} = findUnit(state.unitId);
+  state.flash.index = (state.flash.index-1+unit.vocab.length) % unit.vocab.length;
+  state.flash.flipped = false; render();
+}
+
+/* Quiz */
+function quizSelect(i){
+  if(state.quiz.answered) return;
+  const {unit} = findUnit(state.unitId);
+  const q = unit.quiz[state.quiz.index];
+  state.quiz.selected = i; state.quiz.answered = true;
+  if(i===q.a) state.quiz.score++;
+  render();
+}
+function quizNext(){
+  const {unit} = findUnit(state.unitId);
+  if(state.quiz.index < unit.quiz.length-1){
+    state.quiz.index++; state.quiz.selected=null; state.quiz.answered=false; render();
+  } else {
+    state.quiz.finished = true;
+    const frac = state.quiz.score / unit.quiz.length;
+    const prev = state.progress.scores[unit.id] || 0;
+    state.progress.scores[unit.id] = Math.max(prev, frac);
+    state.progress.completed[unit.id] = true;
+    saveProgress();
+    render();
+  }
+}
+function quizRetry(){
+  state.quiz = {index:0, score:0, selected:null, answered:false, finished:false};
+  render();
+}
+
+let resetArmed = false;
+function resetProgress(){
+  if(!resetArmed){ resetArmed = true; render(); return; }
+  state.progress = {completed:{}, scores:{}};
+  resetArmed = false;
+  saveProgress(); render();
+}
+function cancelReset(){ resetArmed=false; render(); }
+
+/* =====================================================================
+   RENDER \u2014 SCREENS
+   ===================================================================== */
+function render(){
+  const app = document.getElementById('app');
+  if(!state.loaded){
+    app.innerHTML = '<div class="loading-wrap"><p class="loading-text">Cargando tu pasaporte\u2026</p></div>';
+    return;
+  }
+  let html = "";
+  if(state.screen==="home") html = renderHeader()+renderHome();
+  else if(state.screen==="level") html = renderBack(()=>"goHome()", "Inicio")+renderLevelScreen();
+  else if(state.screen==="unit") html = renderBack(()=>`goLevelScreen('${state.level}')`, getLevel(state.level).name)+renderUnitScreen();
+  else if(state.screen==="progress") html = renderHeader()+renderProgressScreen();
+  app.innerHTML = `<div class="screen-wrap">${html}</div>` + renderNav();
+  window.scrollTo(0,0);
+}
+
+function renderHeader(){
+  return `<div class="app-header">
+    <h1 class="app-title">Pasaporte<em>.</em></h1>
+    <p class="app-sub">Tu viaje por el espa\u00F1ol \u00B7 Spanish I &amp; II</p>
+  </div>`;
+}
+function renderBack(targetFn, label){
+  return `<div class="back-row">
+    <button class="back-btn" onclick="${targetFn()}" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      ${label}
+    </button>
+  </div>`;
+}
+
+function renderHome(){
+  const d1 = levelDone("level1"), d2 = levelDone("level2"), tot = totalDone(), totU = totalUnits();
+  const vocabCount = COURSE.level1.units.reduce((s,u)=>s+u.vocab.length,0) + COURSE.level2.units.reduce((s,u)=>s+u.vocab.length,0);
+  const quizCount = COURSE.level1.units.reduce((s,u)=>s+u.quiz.length,0) + COURSE.level2.units.reduce((s,u)=>s+u.quiz.length,0);
+  return `<div class="screen">
+    <p class="intro-line">Pr\u00E1ctica diaria de vocabulario, gram\u00E1tica y cultura para tu clase de espa\u00F1ol \u2014 alineado a los <strong>Texas TEKS \u00A7114.39 / \u00A7114.40</strong>. Cada unidad te lleva a un pa\u00EDs hispanohablante distinto, con dos puntos de gram\u00E1tica, tablas de conjugaci\u00F3n y un quiz de 10 preguntas.</p>
+
+    ${renderLevelCard("level1", d1)}
+    ${renderLevelCard("level2", d2)}
+
+    <div class="home-stats">
+      <div class="stat-box"><div class="stat-num">${tot}/${totU}</div><div class="stat-label">Unidades</div></div>
+      <div class="stat-box"><div class="stat-num">${vocabCount}</div><div class="stat-label">Palabras</div></div>
+      <div class="stat-box"><div class="stat-num">${quizCount}</div><div class="stat-label">Preguntas</div></div>
+      <div class="stat-box"><div class="stat-num">${Object.keys(state.progress.completed).length}</div><div class="stat-label">Sellos</div></div>
+    </div>
+
+    <div class="how-box">
+      <h3>C\u00F3mo funciona cada unidad</h3>
+      <div class="how-steps">
+        <b>Vocabulario</b> \u2014 16 palabras + frases \u00FAtiles, con audio <span>(Interpretive)</span><br>
+        <b>Gram\u00E1tica</b> \u2014 2 puntos con tablas y errores comunes <span>(Presentational)</span><br>
+        <b>Pr\u00E1ctica</b> \u2014 quiz de 10 preguntas por categor\u00EDa <span>(todas las destrezas)</span><br>
+        <b>Cultura</b> \u2014 datos r\u00E1pidos + nota cultural extensa <span>(Cultures)</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderLevelCard(levelKey, done){
+  const lv = getLevel(levelKey);
+  const totalU = lv.units.length;
+  const pct = Math.round((done/totalU)*100);
+  return `<button class="level-card" onclick="goLevelScreen('${levelKey}')">
+    <div class="level-card-top">
+      <div>
+        <span class="eyebrow">${lv.code}</span>
+        <h2>${lv.name}</h2>
+        <p class="level-meta">${lv.proficiency} Proficiency<br>${totalU} unidades \u00B7 8 pa\u00EDses \u00B7 ${lv.units.reduce((s,u)=>s+u.vocab.length,0)} palabras</p>
+      </div>
+      <div class="level-card-stamp">${stampSVG(levelKey, done===totalU, done===totalU? (levelKey==="level1"?"teal":"red") : null, "stamp-lg", levelKey==="level1"?"N1":"N2")}</div>
+    </div>
+    <div class="level-progress-track"><div class="level-progress-fill" style="width:${pct}%"></div></div>
+    <div class="level-progress-label">${done} de ${totalU} unidades \u00B7 ${pct}%</div>
+  </button>`;
+}
+
+function stampSVG(id, filled, colorOverride, sizeClass, label){
+  const color = colorOverride || stampColor(id);
+  const rot = stampRotation(id);
+  const cls = filled ? `stamp filled ${color}` : "stamp empty";
+  return `<div class="${cls} ${sizeClass||''}" style="transform:rotate(${rot}deg)">${esc(label)}</div>`;
+}
+
+function renderLevelScreen(){
+  const lv = getLevel(state.level);
+  return `<div class="screen">
+    <div class="level-header-card">
+      <span class="eyebrow">${lv.code} \u00B7 ${lv.proficiency}</span>
+      <h2>${lv.name}</h2>
+    </div>
+    ${lv.units.map((u,i)=>renderUnitCard(u,i)).join("")}
+  </div>`;
+}
+
+function renderUnitCard(u, i){
+  const done = !!state.progress.completed[u.id];
+  const score = state.progress.scores[u.id];
+  return `<button class="unit-card" onclick="goUnit('${state.level}','${u.id}')">
+    ${done ? stampSVG(u.id, true, null, "", "\u2713") : `<div class="unit-card-num">${i+1}</div>`}
+    <div class="unit-card-body">
+      <div class="unit-card-title">${u.title}</div>
+      <div class="unit-card-en">${u.en}</div>
+      <span class="unit-card-country">\u2708 ${u.country}</span>
+      ${score!==undefined ? `<div class="unit-card-score">Mejor puntaje: ${Math.round(score*100)}%</div>` : ""}
+    </div>
+  </button>`;
+}
+
+function renderUnitScreen(){
+  const {unit} = findUnit(state.unitId);
+  const tabs = [["vocab","Vocabulario"],["grammar","Gram\u00E1tica"],["quiz","Pr\u00E1ctica"],["culture","Cultura"]];
+  return `<div class="screen">
+    <div class="unit-meta-card">
+      <h2>${unit.title}</h2>
+      <p class="unit-meta-en">${unit.en}</p>
+      <div class="unit-meta-row">
+        <span class="tag">${unit.teksFocus}</span>
+        <span class="tag">\u2708 ${unit.country}</span>
+      </div>
+    </div>
+    <div class="tab-bar">
+      ${tabs.map(([key,label])=>`<button class="tab-btn ${state.unitTab===key?'active':''}" onclick="setUnitTab('${key}')">${label}</button>`).join("")}
+    </div>
+    ${state.unitTab==="vocab" ? renderVocabTab(unit) : ""}
+    ${state.unitTab==="grammar" ? renderGrammarTab(unit) : ""}
+    ${state.unitTab==="quiz" ? renderQuizTab(unit) : ""}
+    ${state.unitTab==="culture" ? renderCultureTab(unit) : ""}
+  </div>`;
+}
+
+function renderVocabTab(unit){
+  const v = unit.vocab[state.flash.index];
+  const dots = unit.vocab.map((_,i)=>`<span class="flash-dot ${i===state.flash.index?'on':''}"></span>`).join("");
+  return `
+    <div class="flash-counter">Tarjeta ${state.flash.index+1} de ${unit.vocab.length}</div>
+    <div class="flashcard-wrap">
+      <div class="flashcard ${state.flash.flipped?'flipped':''}" onclick="flashFlip()">
+        <div class="flashcard-face flashcard-front">
+          <div class="flash-word" lang="es">${v.es}</div>
+          <div class="flash-pron">${v.pron}</div>
+          <span class="flash-tap-hint">Toca para traducir</span>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <div class="flash-en">${v.en}</div>
+          <span class="flash-tap-hint">Toca para volver</span>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <button class="flash-listen" onclick="event.stopPropagation(); speak('${v.es.replace(/'/g,"\\'")}')">\uD83D\uDD0A Escuchar</button>
+    </div>
+    <div class="flash-dots">${dots}</div>
+    <div class="flash-nav">
+      <button class="btn btn-secondary" onclick="flashPrev()">\u2190 Anterior</button>
+      <button class="btn btn-secondary" onclick="flashNext()">Siguiente \u2192</button>
+    </div>
+    <div class="phrases-box">
+      <div class="phrases-title">Frases \u00FAtiles de esta unidad</div>
+      ${unit.phrases.map(ph=>`<div class="phrase-item"><span class="phrase-es" lang="es">${ph.es}</span><span class="phrase-en">${ph.en}</span></div>`).join("")}
+    </div>`;
+}
+
+function renderTable(table){
+  if(!table) return "";
+  return `<table class="conj-table"><thead><tr>${table.headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${table.rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+function renderGrammarTab(unit){
+  const g = unit.grammar;
+  return `
+    ${g.points.map((p,i)=>`
+      <div class="grammar-section">
+        <span class="grammar-point-num">Punto ${i+1} de ${g.points.length}</span>
+        <h3 class="grammar-title">${p.title}</h3>
+        <p class="grammar-body">${p.body}</p>
+        ${renderTable(p.table)}
+        ${p.examples.map(ex=>`<div class="example-box"><div class="example-es" lang="es"><span>${ex.es}</span><button class="mini-speak" onclick="event.stopPropagation();speak('${ex.es.replace(/'/g,"\\'")}')" aria-label="Escuchar">\uD83D\uDD0A</button></div><div class="example-en">${ex.en}</div></div>`).join("")}
+      </div>
+    `).join("")}
+    ${g.mistakes ? `<div class="mistake-box"><h4>\u26A0 Errores comunes</h4>${g.mistakes.map(m=>`<div class="mistake-item">${m}</div>`).join("")}</div>` : ""}
+  `;
+}
+
+function renderQuizTab(unit){
+  if(state.quiz.finished){
+    const total = unit.quiz.length;
+    const pct = Math.round((state.quiz.score/total)*100);
+    const stampColorChoice = pct>=80?"teal":"red";
+    let msg = "Sigue practicando \u2014 vuelve a intentarlo cuando quieras.";
+    if(pct>=80) msg = "\u00A1Excelente trabajo! Dominas esta unidad.";
+    else if(pct>=50) msg = "Buen progreso. Repasa las tarjetas y la gram\u00E1tica, y vuelve a intentarlo.";
+    const cats = {};
+    unit.quiz.forEach((q,i)=>{ cats[q.cat] = cats[q.cat]||{c:0,t:0}; cats[q.cat].t++; });
+    return `<div class="results-wrap">
+      <div class="results-stamp">${stampSVG(unit.id, true, stampColorChoice, "stamp-lg", pct+"%")}</div>
+      <div class="results-score">${state.quiz.score} / ${total}</div>
+      <p class="results-msg">${msg}</p>
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="quizRetry()">Intentar de nuevo</button>
+        <button class="btn btn-primary" onclick="goLevelScreen('${state.level}')">Volver al nivel</button>
+      </div>
+    </div>`;
+  }
+  const q = unit.quiz[state.quiz.index];
+  const letters = ["A","B","C","D"];
+  let feedback = "";
+  if(state.quiz.answered){
+    feedback = state.quiz.selected===q.a
+      ? `<div class="quiz-feedback correct">\u2713 \u00A1Correcto!</div>`
+      : `<div class="quiz-feedback incorrect">\u2717 La respuesta correcta es: ${q.choices[q.a]}</div>`;
+  }
+  return `
+    <div class="quiz-progress"><span>Pregunta ${state.quiz.index+1} de ${unit.quiz.length}</span><span>Puntaje: ${state.quiz.score}</span></div>
+    <div class="quiz-cat">${q.cat}</div>
+    <div class="quiz-q">${q.q}</div>
+    ${q.choices.map((c,i)=>{
+      let cls = "quiz-choice";
+      if(state.quiz.answered){
+        if(i===q.a) cls += " correct";
+        else if(i===state.quiz.selected) cls += " incorrect";
+      }
+      return `<button class="${cls}" ${state.quiz.answered?'disabled':''} onclick="quizSelect(${i})">
+        <span class="letter">${letters[i]}</span><span>${c}</span>
+      </button>`;
+    }).join("")}
+    ${feedback}
+    ${state.quiz.answered ? `<button class="btn btn-primary btn-block" onclick="quizNext()">${state.quiz.index<unit.quiz.length-1?'Siguiente pregunta':'Ver resultados'}</button>` : ""}
+  `;
+}
+
+function renderCultureTab(unit){
+  const c = unit.culture;
+  return `
+    <div class="culture-postmark">\u2708 ${c.country}</div>
+    <div class="quickfacts">
+      <div class="quickfact"><div class="quickfact-label">Capital</div><div class="quickfact-value">${c.facts.capital}</div></div>
+      <div class="quickfact"><div class="quickfact-label">Poblaci\u00F3n aprox.</div><div class="quickfact-value">${c.facts.population}</div></div>
+      <div class="quickfact"><div class="quickfact-label">Idioma(s)</div><div class="quickfact-value">${c.facts.language}</div></div>
+      <div class="quickfact"><div class="quickfact-label">Dato</div><div class="quickfact-value">${c.facts.extra}</div></div>
+    </div>
+    <p class="culture-note">${c.note}</p>`;
+}
+
+function renderProgressScreen(){
+  const tot = totalDone(), totU = totalUnits();
+  const pct = Math.round((tot/totU)*100);
+  const circumference = 2*Math.PI*26;
+  const dash = circumference*(pct/100);
+  return `<div class="screen">
+    <div class="progress-top">
+      <div class="progress-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--paper-dark)" stroke-width="7"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--teal)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${dash} ${circumference}"/>
+        </svg>
+        <div class="progress-ring-label">${pct}%</div>
+      </div>
+      <div>
+        <h2 style="font-size:19px;">Tu Pasaporte</h2>
+        <p style="font-size:13px;color:var(--ink-soft);margin-top:3px;">${tot} de ${totU} unidades completadas</p>
+      </div>
+    </div>
+
+    <div class="progress-section-title">Nivel 1 \u2014 Spanish I</div>
+    <div class="stamp-grid">${COURSE.level1.units.map(u=>renderStampGridItem(u)).join("")}</div>
+
+    <div class="progress-section-title">Nivel 2 \u2014 Spanish II</div>
+    <div class="stamp-grid">${COURSE.level2.units.map(u=>renderStampGridItem(u)).join("")}</div>
+
+    <div class="reset-zone">
+      ${resetArmed ? `
+        <p class="reset-hint">\u00BFBorrar todo tu progreso? Esto no se puede deshacer.</p>
+        <div class="btn-row">
+          <button class="btn btn-secondary" onclick="cancelReset()">Cancelar</button>
+          <button class="btn btn-primary" style="background:var(--red);border-color:var(--red-deep);" onclick="resetProgress()">S\u00ED, borrar todo</button>
+        </div>
+      ` : `<button class="btn btn-ghost" onclick="resetProgress()">Reiniciar progreso</button>`}
+    </div>
+  </div>`;
+}
+
+function renderStampGridItem(u){
+  const done = !!state.progress.completed[u.id];
+  return `<div class="stamp-grid-item">
+    ${stampSVG(u.id, done, null, "", done? "\u2713" : "?")}
+    <div class="stamp-grid-label">${u.country}</div>
+  </div>`;
+}
+
+function renderNav(){
+  const items = [
+    {key:"home", label:"Inicio", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>`},
+    {key:"level1", label:"Nivel 1", icon:`<div class="nav-icon-stamp">1</div>`},
+    {key:"level2", label:"Nivel 2", icon:`<div class="nav-icon-stamp">2</div>`},
+    {key:"progress", label:"Progreso", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>`}
+  ];
+  function isActive(key){
+    if(key==="home") return state.screen==="home";
+    if(key==="level1") return state.level==="level1" && (state.screen==="level"||state.screen==="unit");
+    if(key==="level2") return state.level==="level2" && (state.screen==="level"||state.screen==="unit");
+    if(key==="progress") return state.screen==="progress";
+  }
+  function go(key){
+    if(key==="home") return "goHome()";
+    if(key==="progress") return "goProgress()";
+    return `goLevelScreen('${key}')`;
+  }
+  return `<nav class="bottom-nav">
+    ${items.map(it=>`<button class="nav-item ${isActive(it.key)?'active':''}" onclick="${go(it.key)}">${it.icon}<span class="nav-label">${it.label}</span></button>`).join("")}
+  </nav>`;
+}
+
+/* =====================================================================
+   INIT
+   ===================================================================== */
+loadProgress();
+</script>
+</body>
+</html>
